@@ -26,7 +26,7 @@ def main():
     content = s.get(URL).content
     j_content = json.loads(content)
     code = j_content['data']
-    if not data:
+    if not code:
         print(j_content);
         print("data is empty, maybe see https://www.studytime.xin/article/code.html")
         return
