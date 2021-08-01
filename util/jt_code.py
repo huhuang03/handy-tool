@@ -8,7 +8,8 @@ import json
 # https://www.studytime.xin/article/code.html
 
 # 这个按道理说应该从公众号获取
-URL = "https://api.studytime.xin/activationCode?passwd=6247"
+PWD = "3527"
+URL = f"https://api.studytime.xin/activationCode?passwd={PWD}"
 
 
 def main():
@@ -23,9 +24,12 @@ def main():
     })
 
     content = s.get(URL).content
-    print(content)
     j_content = json.loads(content)
     code = j_content['data']
+    if not data:
+        print(j_content);
+        print("data is empty, maybe see https://www.studytime.xin/article/code.html")
+        return
     print(code)
     print('already copied to system clipboard')
     pyperclip.copy(code)
