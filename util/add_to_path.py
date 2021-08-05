@@ -39,7 +39,7 @@ class UserScope:
 def main():
     if not is_windows():
         exit("Only work in windows for now")
-
+    UserScope().add_cwd_to_path()
     print("Success")
 
 
