@@ -1,3 +1,4 @@
+from util.util import is_windows
 from setuptools import setup
 import os
 
@@ -17,17 +18,6 @@ def _create_jetbrains_command(name):
     return '{} = util.jet_brains:main'.format(name)
 
 
-def _create_by_cli():
-    """
-    Fuck I don't write for now.
-    :return:
-    """
-    pwd = os.getcwd()
-    cli_path = os.path.join(pwd, 'util/cli/')
-    if os.path.exists(cli_path):
-        for f in os.listdir(cli_path):
-            print(f)
-
 
 COMMANDS = ["gitup", 'add_to_path', "gettopactivity", "ip", "cmake_ex", "merged_rm",
             "lg", 'utf8_2_utf8bom', "save_space", 'find_program', 'rn_ex', 'json2bean', 'jt_code', 'remote']
@@ -36,7 +26,8 @@ COMMANDS = ["gitup", 'add_to_path', "gettopactivity", "ip", "cmake_ex", "merged_
 def _get_scripts():
     # why I need create this by hand??
     rst = create_console_script(*COMMANDS)
-    _create_by_cli()
+    if is_windows():
+        rst.append(_create_command("l", "l"))
     rst.append(_create_command("an_util", "an_util"))
     rst.append(_create_command('acode', 'idea.idea_android'))
     rst.append(_create_command('scode', 'idea.scode'))
