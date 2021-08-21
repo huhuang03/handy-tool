@@ -7,4 +7,5 @@ def main():
     ensure_is_win()
     subprocess.run(['powershell', '-Command', f'Get-ChildItem |Sort-Object LastWriteTime'])
 
+
 main()
