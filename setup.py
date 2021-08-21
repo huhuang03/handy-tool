@@ -19,7 +19,7 @@ def _create_jetbrains_command(name):
 
 
 
-COMMANDS = ["gitup", 'add_to_path', "gettopactivity", "ip", "cmake_ex", "merged_rm",
+COMMANDS = ["gitup", 'done', 'add_to_path', "gettopactivity", "ip", "cmake_ex", "merged_rm",
             "lg", 'utf8_2_utf8bom', "save_space", 'find_program', 'rn_ex', 'json2bean', 'jt_code', 'remote']
 
 
