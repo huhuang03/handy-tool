@@ -13,10 +13,6 @@ def _create_command(name, file_path):
     return f'{name} = util.{file_path}:main'
 
 
-def _create_jetbrains_command(name):
-    return '{} = util.jet_brains:main'.format(name)
-
-
 def _create_by_cli():
     """
     Fuck I don't write for now.
@@ -38,6 +34,8 @@ def _get_scripts():
     rst = create_console_script(*COMMANDS)
     _create_by_cli()
     rst.append(_create_command("an_util", "an_util"))
+    rst.append(_create_command('personal', 'personal.personal'))
+    rst.append(_create_command('vcode', 'idea.vs'))
     rst.append(_create_command('acode', 'idea.idea_android'))
     rst.append(_create_command('scode', 'idea.scode'))
     rst.append(_create_command('pcode', 'idea.idea_pycharm'))

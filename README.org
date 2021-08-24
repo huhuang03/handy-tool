@@ -53,5 +53,5 @@ remote a-remember-name-for-login-later
 | jt_ex          | crach the jetbran active code           |
 
 
-** TODO
-generate the
+* TODOS
+How to let the jt_code use for private.
