@@ -1,6 +1,7 @@
 import os
 from .idea_base import IdeaBase
-from ..util.util_find_program import find_program, find_file
+from ..util.util_find_program import find_file
+from ..app import App
 
 SUFFIX = ".sln"
 
@@ -24,7 +25,8 @@ class IdeaVs(IdeaBase):
             exit('Cannot find the sln file, please check')
         vs_exe_path = self.get_vs_exe_path()
         print(f'vs_exe_path {vs_exe_path}')
+        App(vs_exe_path, sln_file_path).open_file(sln_file_path)
 
 
-if __name__ == '__main__':
+def main():
     IdeaVs().main()
