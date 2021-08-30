@@ -1,3 +1,4 @@
+import os
 import pathlib
 import argparse
 from .clean import clean
@@ -6,8 +7,9 @@ from ..util.util_git import add_git_ignore
 
 def _install():
     # how can we do the install?
-    pathlib.Path('build32').mkdir(exist_ok=True)
     add_git_ignore('*build*/')
+    pathlib.Path('build32').mkdir(exist_ok=True)
+    os.system('cmake')
 
 
 def main():

@@ -4,6 +4,7 @@ import time
 
 from .get_apk import get_apk
 from .wifi import wifi
+from .push_cert import push_cert
 
 
 def _command_push_cert(sub_parser):
@@ -30,8 +31,8 @@ def main():
     parser = argparse.ArgumentParser(description="android utils")
 
     subparser = parser.add_subparsers(dest="command")
-    push_cert = subparser.add_parser("push_cert", help="push cert file to system cert location(with rename it)")
-    push_cert.add_argument("cert_file", type=str, help="cert file(like charlese cert file)")
+    parser_push_cert = subparser.add_parser("push_cert", help="push cert file to system cert location(with rename it)")
+    parser_push_cert.add_argument("cert_file_path", type=str, help="cert file(like charles cert file)")
 
     subparser.add_parser("screenshot", help="take a screenshot save name as current time milliseconds.")
 
@@ -53,6 +54,8 @@ def main():
         get_apk(args)
     elif args.command == "wifi":
         wifi()
+    elif args.command == "push_cert":
+        push_cert(args)
 
 
 if __name__ == "__main__":

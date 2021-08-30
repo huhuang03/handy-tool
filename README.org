@@ -8,10 +8,10 @@ pip install -e .
 * Utils
 
 ** like vscode's code
-
 | ccode | open project in clion |
 | acode | in android studio     |
 | pcode | in pycharm            |
+
 
 ** gitup
 It's a util to quick commit to server.
@@ -48,10 +48,10 @@ remote a-remember-name-for-login-later
 
 ** others
 | ip             | get output ip                           |
-| gettopactivity | get android device topest activity name |
+| gettopactivity | get android device top activity name |
 | cmake_ex       | remove the cmake cache files            |
-| jt_ex          | crach the jetbran active code           |
+| jt_ex          | crawl the jetbrain active code           |
 
 
-** TODO
-generate the
+* TODOS
+How to let the jt_code use for private.

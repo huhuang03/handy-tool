@@ -1,8 +1,7 @@
-import sys
-from .util import *
-import os
 import subprocess
-from sys import call_tracing, platform
+import sys
+
+from .util import *
 
 DETACHED_PROCESS = 8
 
@@ -16,11 +15,15 @@ class App:
         self.win_path = win_path
         self.mac_path = mac_path
 
-    def start_in_folder(self, folder):
-        full_dir_path = os.path.abspath(folder)
+    def open_file(self, file_path):
+        full_file_path = os.path.abspath(file_path)
 
-        if not os.path.exists(full_dir_path):
-            raise Exception("Why path not exist: " + full_dir_path)
+        if not os.path.exists(full_file_path):
+            raise Exception("Why path not exist: " + full_file_path)
+
+        folder_path = file_path
+        if not os.path.isdir(folder_path):
+            folder_path = os.path.dirname(full_file_path)
 
         if is_windows():
             if not self.win_path:
@@ -30,15 +33,15 @@ class App:
             # Popen is not good because it will still controlled by the process open the win_path
             # how to start the bat??
             try:
-                subprocess.Popen([self.win_path, full_dir_path], cwd=full_dir_path, creationflags=DETACHED_PROCESS,
+                subprocess.Popen([self.win_path, full_file_path], cwd=folder_path, creationflags=DETACHED_PROCESS,
                                  close_fds=True)
             except Exception as e:
                 print(f"win_path: {self.win_path}")
                 raise e
         elif is_mac():
             if not self.mac_path:
-                exit('mac application path not specified')
-            subprocess.Popen(['open', '-a', self.mac_path, folder], cwd=full_dir_path)
+                exit('mac not support for now')
+            subprocess.Popen(['open', '-a', self.mac_path, file_path], cwd=folder_path)
         else:
             raise Exception(f"Not work on {platform}")
 
@@ -47,4 +50,4 @@ class App:
             dir_name = sys.argv[1]
         else:
             dir_name = "."
-        self.start_in_folder(dir_name)
+        self.open_file(dir_name)

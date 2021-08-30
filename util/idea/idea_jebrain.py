@@ -45,4 +45,4 @@ class IDeaJetBrains(IdeaBase):
         return ""
 
     def run(self, root):
-        App(self.get_exe_in_win(), self.get_exe_in_mac()).start_in_folder(root)
+        App(self.get_exe_in_win(), self.get_exe_in_mac()).open_file(root)

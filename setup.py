@@ -14,6 +14,18 @@ def _create_command(name, file_path):
     return f'{name} = util.{file_path}:main'
 
 
+def _create_by_cli():
+    """
+    Fuck I don't write for now.
+    :return:
+    """
+    pwd = os.getcwd()
+    cli_path = os.path.join(pwd, 'util/cli/')
+    if os.path.exists(cli_path):
+        for f in os.listdir(cli_path):
+            print(f)
+
+
 def _create_jetbrains_command(name):
     return '{} = util.jet_brains:main'.format(name)
 
@@ -29,6 +41,8 @@ def _get_scripts():
         rst.append(_create_command("l", "l"))
     rst.append(_create_command("an_util", "an_util"))
     rst.append(_create_command('cm', 'cm'))
+    rst.append(_create_command('personal', 'personal.personal'))
+    rst.append(_create_command('vcode', 'idea.vs'))
     rst.append(_create_command('acode', 'idea.idea_android'))
     rst.append(_create_command('scode', 'idea.scode'))
     rst.append(_create_command('pcode', 'idea.idea_pycharm'))
