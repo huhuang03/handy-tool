@@ -9,7 +9,11 @@ def _install():
     # how can we do the install?
     add_git_ignore('*build*/')
     pathlib.Path('build32').mkdir(exist_ok=True)
-    os.system('cmake')
+    os.system('cd build32')
+    os.system('cmake . -A win32')
+    os.system('cmake --build . --config Release --target install')
+    os.system('cmake --build . --config Debug --target install')
+    os.system('cd ..')
 
 
 def main():
