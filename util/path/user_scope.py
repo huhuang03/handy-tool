@@ -2,8 +2,6 @@ from typing import List
 import os
 import subprocess
 
-from .util.util import is_windows
-
 
 class UserScope:
     def fix_path(self, path):
@@ -36,12 +34,4 @@ class UserScope:
                 exit(f"set new_path failed")
 
 
-def main():
-    if not is_windows():
-        exit("Only work in windows for now")
-    UserScope().add_cwd_to_path()
-    print("Success")
-
-
-if __name__ == '__main__':
-    main()
+user_scope = UserScope()

@@ -17,6 +17,6 @@ def install(args):
 
     commands += ['cd ..']
     commands_str = "&".join(commands)
-    print(commands_str)
-    # os.system()
+    # print(commands_str)
+    os.system(commands_str)
 
