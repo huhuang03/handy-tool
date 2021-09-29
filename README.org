@@ -7,6 +7,16 @@ pip install -e .
 
 * Utils
 
+** cm
+cmake tool.
+
+- ~cm i~
+#+BEGIN_SRC shell
+mkdir build32
+# build and install in build32
+#+END_SRC
+
+
 ** like vscode's code
 | ccode | open project in clion |
 | acode | in android studio     |
