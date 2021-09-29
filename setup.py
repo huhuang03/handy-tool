@@ -40,6 +40,7 @@ def _get_scripts():
     if is_windows():
         rst.append(_create_command("l", "l"))
     rst.append(_create_command("an_util", "an_util"))
+    rst.append(_create_command("au", "an_util"))
     rst.append(_create_command('personal', 'personal.personal'))
     rst.append(_create_command('vcode', 'idea.vs'))
     rst.append(_create_command('acode', 'idea.idea_android'))
