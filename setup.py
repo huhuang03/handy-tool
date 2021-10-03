@@ -40,6 +40,7 @@ def _get_scripts():
     if is_windows():
         rst.append(_create_command("l", "l"))
     rst.append(_create_command("an_util", "an_util"))
+    rst.append(_create_command("au", "an_util"))
     rst.append(_create_command('cm', 'cm'))
     rst.append(_create_command('path', 'path'))
     rst.append(_create_command('personal', 'personal.personal'))
