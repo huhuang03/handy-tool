@@ -1,6 +1,7 @@
 from typing import List
 import os
 import subprocess
+from .inner.db import add
 
 
 class UserScope:
@@ -9,9 +10,13 @@ class UserScope:
         path = path.replace('\n', '')
         return path
 
-    def set_path(self, path):
+    def _set_path(self, path: str):
+        add(path)
         rst = subprocess.run(['powershell', '-Command', f'[Environment]::SetEnvironmentVariable("Path", "{path}", "User")'])
         return rst
+
+    def set_path(self, path: List[str]):
+        return self._set_path(";".join(path))
 
     def get_path(self) -> [List[str], str]:
         output = subprocess.run(['powershell', '-Command', '[Environment]::GetEnvironmentVariable("Path", "User")'], capture_output=True)
@@ -26,7 +31,7 @@ class UserScope:
             print("already exist in path")
             return
         new_path = old_path + ";" + os.getcwd()
-        rst = self.set_path(new_path)
+        rst = self.set_path(new_path.split(";"))
         if not rst.returncode == 0:
             if rst.stderr:
                 exit(f"set new_path failed with {rst.stderr.decode('utf-8')}")

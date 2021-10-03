@@ -10,9 +10,9 @@ def add(path):
     :param path:
     :return:
     """
-    cache_file_dir = '~/.util.python/'
+    cache_file_dir = os.path.join(os.path.expanduser('~'), '.util.python/')
     cache_file_path = os.path.join(cache_file_dir, 'path_back.txt')
-    pathlib.Path(cache_file_path).mkdir(exist_ok=True)
+    pathlib.Path(cache_file_dir).mkdir(exist_ok=True)
     paths: List[str] = []
 
     if os.path.exists(cache_file_path):

@@ -1,8 +1,3 @@
-from typing import List
-import os
-import subprocess
-
-from util.util.util import is_windows
 from .user_scope import user_scope
 from ..util.util import ensure_is_win
 

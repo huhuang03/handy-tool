@@ -1,6 +1,6 @@
 import argparse
 from .clean import clean
-from .init import install
+from .install import install
 
 
 def main():
@@ -11,7 +11,8 @@ def main():
     subparsers.add_parser('c', help='clean the cmake cache files.')
 
     p_i = subparsers.add_parser('i', help='install 32 bit')
-    p_i.add_argument('-d', dest='build_debug', action='store_true')
+    p_i.add_argument('-i32', dest='install_32', action='store_true')
+    p_i.add_argument('-i64', dest='install_64', action='store_true')
 
     args = parser.parse_args()
     command = args.command
