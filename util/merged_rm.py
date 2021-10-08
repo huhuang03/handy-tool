@@ -11,7 +11,7 @@ def main():
     for mb in merged_branches:
         if not (mb.startswith('*') or mb in _reserve_branch):
             print(f'delete branch {mb}')
-            subprocess.check_output(['git', 'branch', '-d', name])
+            subprocess.check_output(['git', 'branch', '-d', mb])
 
         if mb in _need_check_branch:
             print('{} already merged'.format(mb))
