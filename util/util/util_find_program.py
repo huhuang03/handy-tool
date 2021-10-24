@@ -116,7 +116,8 @@ def find_folder_by_file_name(folders: [str], file_names: [str]) -> [str]:
     rst: [str] = []
     for f in folders:
         for dirpath, dirnames, filenames in os.walk(f):
-            print("search in folder: ", dirpath)
+            if dirpath in rst:
+                continue
             found = True
             for name in file_names:
                 if name not in filenames:
@@ -125,4 +126,5 @@ def find_folder_by_file_name(folders: [str], file_names: [str]) -> [str]:
 
             if found:
                 rst.append(dirpath)
+    rst = [f for f in rst if 'jre' not in f]
     return rst

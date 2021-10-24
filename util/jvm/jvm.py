@@ -1,5 +1,7 @@
 from util import util
+import inquirer
 import os
+from .. import env
 
 
 class JVM:
@@ -26,13 +28,23 @@ class JVM:
         # search in the common path
         if len(self._pathes) == 0:
             print("theres no pathes, so I will do a search.")
-            self._init_by_search()
+            bin_pathes = self._init_by_search()
+            self._pathes = [os.path.dirname(f) for f in bin_pathes]
 
-    def _init_by_search(self):
-        util.find_folder_by_file_name(
+    def _init_by_search(self) -> [str]:
+        return util.find_folder_by_file_name(
             util.get_folders_in_program_files(["Java"]),
             ["java.exe"]
         )
+
+    def use(self):
+        choice = inquirer.prompt([
+            inquirer.List('path',
+                          message='Which path you want use',
+                          choices=self._pathes)
+        ])
+        if choice:
+            env.set_in_user('JAVA_HOME', choice['path'])
 
     def read(self) -> [str]:
         pass

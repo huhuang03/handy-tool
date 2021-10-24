@@ -1,3 +1,5 @@
 * Commands
-** `jvm clean`
+** `jvm use` choice the path.
+
+** `jvm clean` not impl
 remove the hard coded java path, and create an JAVA_HOME
