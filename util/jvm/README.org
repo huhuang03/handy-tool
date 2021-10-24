@@ -1,0 +1,3 @@
+* Commands
+** `jvm clean`
+remove the hard coded java path, and create an JAVA_HOME

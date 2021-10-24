@@ -2,6 +2,23 @@ from typing import List, Iterator
 import os
 
 
+def get_folders_in_program_files(sub_folders: [str]) -> [str]:
+    return [os.path.join(f, *(["Program Files"] + sub_folders)) for f in get_driver_paths()] \
+           + [os.path.join(f, *(["Program Files (x86)"] + sub_folders)) for f in get_driver_paths()]
+
+
+def get_driver_paths():
+    """
+    Find the driver that exist.
+    """
+    rst: [str] = []
+    for i in range(ord('A'), ord('Z')):
+        dir_driver = f"{str(chr(i))}:\\"
+        if os.path.exists(dir_driver):
+            rst.append(dir_driver)
+    return rst
+
+
 # Find program in windows
 # It will search program in X:\Program Files X:\Program Files(x86)
 def _find_in_folder(folder_name, to_find) -> [str]:
@@ -79,3 +96,33 @@ def _find_files_iter(part_name: List[str], cur_folder: str) -> Iterator[str]:
         for fit_file in fit_files:
             if os.path.isdir(fit_file):
                 yield from _find_files_iter(other_parts, fit_file)
+
+
+def find_folder_in_program_files_by_file_name(file_name: [str]) -> [str]:
+    # yield from _find_files_iter(["Program Files"] + part_name, dir_driver)
+    # yield from _find_files_iter(["Program Files (x86)"] + part_name, dir_driver)
+    return find_folder_by_file_name(
+        get_folders_in_program_files([]),
+        file_name
+    )
+
+
+def find_folder_by_file_name(folders: [str], file_names: [str]) -> [str]:
+
+    """
+    How to judge the folder level?
+    :return:
+    """
+    rst: [str] = []
+    for f in folders:
+        for dirpath, dirnames, filenames in os.walk(f):
+            print("search in folder: ", dirpath)
+            found = True
+            for name in file_names:
+                if name not in filenames:
+                    found = False
+                    break
+
+            if found:
+                rst.append(dirpath)
+    return rst

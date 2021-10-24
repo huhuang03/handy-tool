@@ -39,6 +39,7 @@ def _get_scripts():
     rst = create_console_script(*COMMANDS)
     if is_windows():
         rst.append(_create_command("l", "l"))
+    rst.append(_create_command("jvm", "jvm"))
     rst.append(_create_command("an_util", "an_util"))
     rst.append(_create_command("au", "an_util"))
     rst.append(_create_command('cm', 'cm'))
