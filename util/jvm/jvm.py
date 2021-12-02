@@ -11,25 +11,29 @@ class JVM:
     按照一般软件的开发方式，应该是越来越复杂吧。先做一个简单模型出来
     """
     def __init__(self):
-        self._pathes = []
+        self._paths = []
         util.ensure_is_win()
         self._initial()
 
-    def add_pathes(self, path: [str]):
+    def list_paths(self):
+        for path in self._paths:
+            print(path)
+
+    def add_paths(self, path: [str]):
         pass
 
     def add_one_path(self, path: str):
-        self.add_pathes([path])
+        self.add_paths([path])
 
-    def _clean_add_save(self, pathes: [str]):
-        pathes = [p for p in pathes if os.path.exists(p)]
+    def _clean_add_save(self, paths: [str]):
+        paths = [p for p in paths if os.path.exists(p)]
 
     def _initial(self):
         # search in the common path
-        if len(self._pathes) == 0:
-            print("theres no pathes, so I will do a search.")
-            bin_pathes = self._init_by_search()
-            self._pathes = [os.path.dirname(f) for f in bin_pathes]
+        if len(self._paths) == 0:
+            # print("theres no pathes, so I will do a search.")
+            bin_paths = self._init_by_search()
+            self._paths = [os.path.dirname(f) for f in bin_paths]
 
     def _init_by_search(self) -> [str]:
         return util.find_folder_by_file_name(
@@ -41,10 +45,11 @@ class JVM:
         choice = inquirer.prompt([
             inquirer.List('path',
                           message='Which path you want use',
-                          choices=self._pathes)
+                          choices=self._paths)
         ])
         if choice:
             env.set_in_user('JAVA_HOME', choice['path'])
+            print('done')
 
     def read(self) -> [str]:
         pass
