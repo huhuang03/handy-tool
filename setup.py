@@ -30,8 +30,11 @@ def _create_jetbrains_command(name):
     return '{} = util.jet_brains:main'.format(name)
 
 
-COMMANDS = ["gitup", 'done', "gettopactivity", "ip", "merged_rm",
-            "lg", 'utf8_2_utf8bom', "save_space", 'find_program', 'rn_ex', 'json2bean', 'jt_code', 'remote']
+COMMANDS = [
+    "gitup", 'done', "gettopactivity", "ip", "merged_rm",
+    "lg", 'utf8_2_utf8bom', "save_space", 'find_program',
+    'rn_ex', 'json2bean', 'jt_code', 'remote',
+    'sync']
 
 
 def _get_scripts():
