@@ -5,3 +5,4 @@ __pycache__/
 server_list.txt
 .server_list.txt
 local.ini
+sync_private/

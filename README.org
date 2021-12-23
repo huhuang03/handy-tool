@@ -65,3 +65,6 @@ remote a-remember-name-for-login-later
 
 * TODOS
 How to let the jt_code use for private.
+
+
+* Sync? need be access private repo.
