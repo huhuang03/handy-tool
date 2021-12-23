@@ -17,6 +17,14 @@ def push_cert(args):
         print(f"Please notice that I have renamed {src_cert_path} to {renamed_cert_path}")
         os.rename(src_cert_path, renamed_cert_path)
     os.system(f'adb push {renamed_cert_path} /sdcard/{cert_file_name}')
+
+    # ok, read write the storage.
+    command = f"adb shell su -c 'mount -o rw,remount /'"
+    os.system(command)
+
     command = f"adb shell su -c 'cp /sdcard/{cert_file_name} /system/etc/security/cacerts/'"
     os.system(command)
     os.system(f"adb shell su -c 'chmod 644 /system/etc/security/cacerts/{cert_file_name}'")
+
+    command = f"adb shell su -c 'mount -o ro,remount /'"
+    os.system(command)

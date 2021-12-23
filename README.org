@@ -16,11 +16,19 @@ mkdir build32
 # build and install in build32
 #+END_SRC
 
+** jvm
+| jvm list | list all searched jdk | |
+| jvm use | choice jdk version(by set the JAVA_HOME, need open new terminal to effect) | only win|
+
+** an_util
+| wifi | turn on adb-via-wifi on connected usb device(only test only one device connected).|
+| push_cart | push cert to device as system certification(need root) |
 
 ** like vscode's code
 | ccode | open project in clion |
 | acode | in android studio     |
 | pcode | in pycharm            |
+| icode | open intellij |
 
 
 ** gitup
