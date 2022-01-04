@@ -1,5 +1,6 @@
 import os
 import pyjson5 as json
+from .sync import _sync
 
 
 def _get_root_path():
@@ -21,4 +22,4 @@ def sync_windows_terminal():
 
 
 def main():
-    sync_windows_terminal()
+    _sync()
