@@ -1,0 +1,9 @@
+* How can I sync the private info
+
+For example content in $profile has some private content.
+
+Any better idea how to organization that?
+
+** How about apply `import {$profile}_private.ps1` in $profile
+
+I't not comm, and it will limit the content order.
