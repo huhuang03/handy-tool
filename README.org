@@ -44,24 +44,10 @@ git commit -a -m "Your input commit message"
 git push
 #+END_SRC
 
-** remote
-It's a util to save your remote server setting, and setup remote server login auto login
-
-*** Add remote
+** junk_file
+Create an junk file wth 10M size.
 #+BEGIN_SRC shell
-remote add a-remember-name-for-login-later
-# Then It will prompt input name@host and password
-# And It will copy .ssh/id_rsa.pub to auto login
-#+END_SRC
-
-** List remote
-#+BEGIN_SRC shell
-remote list
-#+END_SRC
-
-** Login remote
-#+BEGIN_SRC shell
-remote a-remember-name-for-login-later
+junk_file 10
 #+END_SRC
 
 ** others
