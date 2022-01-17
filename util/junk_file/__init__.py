@@ -1,12 +1,43 @@
 import argparse
 import datetime
+import re
+
+
+def _parse_size(size_str) -> int:
+    """
+    parse the size_str to size(unit m)
+    """
+    r = re.compile(r'((\d*)[Gg])?(\d*)[Mm]?')
+    m = r.match(size_str)
+    g = m.groups()
+    if len(g) == 3:
+        g_size = g[1]
+        m_size = g[2]
+        rst = 0
+        if m_size is not None and len(m_size) > 0:
+            rst += int(m_size)
+        if g_size is not None and len(g_size) > 0:
+            rst += 1024 * int(g_size)
+        return rst
+    return 0
+
+
+def _format_size(size: int) -> str:
+    g = size / 1024
+    m = size % 1024
+    rst = str(m) + 'M'
+    if g:
+        rst = f'{g}{rst}'
+    return rst
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("size")
     args = parser.parse_args()
-    size = int(args.size)
+    size_str = args.size
+    size = _parse_size(size_str)
+    print(f'begin to crate {_format_size(size)} junk file')
     file_name = str(datetime.datetime.now()).replace(':', '_') + '_junk_file.tmp'
     with open(file_name, 'wb') as f:
         index = 0

@@ -49,6 +49,9 @@ Create an junk file wth 10M size.
 #+BEGIN_SRC shell
 junk_file 10
 #+END_SRC
+*** TODOS
+- support xx(G|g)xx(M|m)
+- add option -random, fill the junk file with random value.
 
 ** others
 | ip             | get output ip                           |
