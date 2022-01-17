@@ -34,7 +34,7 @@ COMMANDS = [
     "gitup", 'done', "gettopactivity", "ip", "merged_rm",
     "lg", 'utf8_2_utf8bom', "save_space", 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote',
-    'sync']
+    'sync', 'junk_file']
 
 
 def _get_scripts():
