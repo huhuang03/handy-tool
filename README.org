@@ -47,11 +47,23 @@ git push
 ** junk_file
 Create an junk file wth 10M size.
 #+BEGIN_SRC shell
-junk_file 10
+# create an 10G junk_file
+junk_file 10G
+
+# create an 9M junk_file
+junk_file 9M
+# or
+junk_file 9
+
+# create an 10G9M junk_file
+junk_file 10G9M
 #+END_SRC
 *** TODOS
-- support xx(G|g)xx(M|m)
 - add option -random, fill the junk file with random value.
+
+*** permission define
+When create in driver ~C:~, there's a permission deny issue. You can run in a ~Run as amin~ powershell to
+get ride of this.
 
 ** others
 | ip             | get output ip                           |

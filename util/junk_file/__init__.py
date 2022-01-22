@@ -23,11 +23,13 @@ def _parse_size(size_str) -> int:
 
 
 def _format_size(size: int) -> str:
-    g = size / 1024
+    g = size // 1024
     m = size % 1024
-    rst = str(m) + 'M'
+    rst = ''
+    if m:
+        rst += str(m) + 'M'
     if g:
-        rst = f'{g}{rst}'
+        rst = f'{g}G{rst}'
     return rst
 
 
@@ -39,9 +41,14 @@ def main():
     size = _parse_size(size_str)
     print(f'begin to crate {_format_size(size)} junk file')
     file_name = str(datetime.datetime.now()).replace(':', '_') + '_junk_file.tmp'
+
+    # better write method?
+    # write 1M per
+
+    one_m_data = bytes([0x1]) * 1024 * 1024
     with open(file_name, 'wb') as f:
         index = 0
-        while index < size * 1024 * 1024:
-            f.write(bytes([0x1]))
+        while index < size:
+            f.write(one_m_data)
             index += 1
     print('done!')
