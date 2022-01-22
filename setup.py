@@ -49,7 +49,7 @@ def _get_scripts():
     print(COMMAND_MAP)
     for item in COMMAND_MAP:
         print(item)
-        _create_command(item[0], item[1])
+        rst.append(_create_command(item[0], item[1]))
     if is_windows():
         rst.append(_create_command("l", "l"))
     rst.append(_create_command('personal', 'personal.personal'))
