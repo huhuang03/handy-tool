@@ -34,19 +34,24 @@ COMMANDS = [
     "gitup", 'done', "gettopactivity", "ip", "merged_rm",
     "lg", 'utf8_2_utf8bom', "save_space", 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote',
-    'sync', 'junk_file']
+    'sync', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
+
+COMMAND_MAP = [
+    ['au', "an_util"],
+    ['g', 'git']
+]
 
 
 def _get_scripts():
+    print('hello')
     # why I need create this by hand??
     rst = create_console_script(*COMMANDS)
+    print(COMMAND_MAP)
+    for item in COMMAND_MAP:
+        print(item)
+        _create_command(item[0], item[1])
     if is_windows():
         rst.append(_create_command("l", "l"))
-    rst.append(_create_command("jvm", "jvm"))
-    rst.append(_create_command("an_util", "an_util"))
-    rst.append(_create_command("au", "an_util"))
-    rst.append(_create_command('cm', 'cm'))
-    rst.append(_create_command('path', 'path'))
     rst.append(_create_command('personal', 'personal.personal'))
     rst.append(_create_command('vcode', 'idea.vs'))
     rst.append(_create_command('acode', 'idea.idea_android'))
