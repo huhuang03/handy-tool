@@ -14,18 +14,6 @@ def _create_command(name, file_path):
     return f'{name} = util.{file_path}:main'
 
 
-def _create_by_cli():
-    """
-    Fuck I don't write for now.
-    :return:
-    """
-    pwd = os.getcwd()
-    cli_path = os.path.join(pwd, 'util/cli/')
-    if os.path.exists(cli_path):
-        for f in os.listdir(cli_path):
-            print(f)
-
-
 def _create_jetbrains_command(name):
     return '{} = util.jet_brains:main'.format(name)
 
@@ -34,7 +22,7 @@ COMMANDS = [
     "gitup", 'done', "gettopactivity", "ip", "merged_rm",
     "lg", 'utf8_2_utf8bom', "save_space", 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote',
-    'sync', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
+    'sync1', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
 
 COMMAND_MAP = [
     ['au', "an_util"],
@@ -43,12 +31,9 @@ COMMAND_MAP = [
 
 
 def _get_scripts():
-    print('hello')
     # why I need create this by hand??
     rst = create_console_script(*COMMANDS)
-    print(COMMAND_MAP)
     for item in COMMAND_MAP:
-        print(item)
         rst.append(_create_command(item[0], item[1]))
     if is_windows():
         rst.append(_create_command("l", "l"))

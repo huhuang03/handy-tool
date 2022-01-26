@@ -8,3 +8,7 @@ def _sync():
     if not setting:
         exit('You must specify a setting.yml file')
     sync_emacs_d()
+
+
+def main():
+    print('should not be here')
