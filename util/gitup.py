@@ -15,5 +15,5 @@ def main():
     if not msg:
         msg = 'update'
     os.system('git commit --no-verify -a -m "%s"' % msg)
-    if arg.push:
+    if args.push:
         os.system('git push')
