@@ -10,7 +10,6 @@ class App:
     """
     Represent an application
     """
-
     def __init__(self, win_path='', mac_path=''):
         self.win_path = win_path
         self.mac_path = mac_path

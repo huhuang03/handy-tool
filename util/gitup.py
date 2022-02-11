@@ -7,7 +7,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--push", dest="push", action="store_true", help="run the push")
     parser.add_argument("--no-push", dest="push", action="store_false", help="run the push")
-    parser.set_defaults(puhs=True)
+    parser.set_defaults(push=True)
     args = parser.parse_args()
 
     os.system('git add .')
