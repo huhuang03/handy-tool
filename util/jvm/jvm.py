@@ -47,9 +47,14 @@ class JVM:
                           message='Which path you want use',
                           choices=self._paths)
         ])
+        print(f"choice: {choice}, java_home: {choice['path']}")
         if choice:
+            env.insert_front_in_path_temporary("")
             env.set_in_user('JAVA_HOME', choice['path'])
+            # but how to let the path active immediately
             print('done')
+        else:
+            print("not choice")
 
     def read(self) -> [str]:
         pass

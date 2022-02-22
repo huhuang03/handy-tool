@@ -33,7 +33,7 @@ def _create_jetbrains_command(name):
 COMMANDS = [
     "gitup", 'done', "gettopactivity", "ip", "merged_rm",
     "lg", 'utf8_2_utf8bom', "save_space", 'find_program',
-    'rn_ex', 'json2bean', 'jt_code', 'remote',
+    'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
     'sync']
 
 
