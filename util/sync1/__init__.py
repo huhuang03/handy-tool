@@ -1,5 +1,8 @@
 import os
 import pyjson5 as json
+from .sync import _sync
+from util.util import is_mac, is_windows
+from .mac import mac_sync
 
 
 def _get_root_path():
@@ -21,4 +24,7 @@ def sync_windows_terminal():
 
 
 def main():
-    sync_windows_terminal()
+    if is_mac():
+        mac_sync()
+    elif is_windows():
+        _sync()

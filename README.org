@@ -44,25 +44,26 @@ git commit -a -m "Your input commit message"
 git push
 #+END_SRC
 
-** remote
-It's a util to save your remote server setting, and setup remote server login auto login
-
-*** Add remote
+** junk_file
+Create an junk file wth 10M size.
 #+BEGIN_SRC shell
-remote add a-remember-name-for-login-later
-# Then It will prompt input name@host and password
-# And It will copy .ssh/id_rsa.pub to auto login
-#+END_SRC
+# create an 10G junk_file
+junk_file 10G
 
-** List remote
-#+BEGIN_SRC shell
-remote list
-#+END_SRC
+# create an 9M junk_file
+junk_file 9M
+# or
+junk_file 9
 
-** Login remote
-#+BEGIN_SRC shell
-remote a-remember-name-for-login-later
+# create an 10G9M junk_file
+junk_file 10G9M
 #+END_SRC
+*** TODOS
+- add option -random, fill the junk file with random value.
+
+*** permission define
+When create in driver ~C:~, there's a permission deny issue. You can run in a ~Run as amin~ powershell to
+get ride of this.
 
 ** others
 | ip             | get output ip                           |

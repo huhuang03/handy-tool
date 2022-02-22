@@ -14,18 +14,6 @@ def _create_command(name, file_path):
     return f'{name} = util.{file_path}:main'
 
 
-def _create_by_cli():
-    """
-    Fuck I don't write for now.
-    :return:
-    """
-    pwd = os.getcwd()
-    cli_path = os.path.join(pwd, 'util/cli/')
-    if os.path.exists(cli_path):
-        for f in os.listdir(cli_path):
-            print(f)
-
-
 def _create_jetbrains_command(name):
     return '{} = util.jet_brains:main'.format(name)
 
@@ -34,19 +22,21 @@ COMMANDS = [
     "gitup", 'done', "gettopactivity", "ip", "merged_rm",
     "lg", 'utf8_2_utf8bom', "save_space", 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
-    'sync']
+    'sync1', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
+
+COMMAND_MAP = [
+    ['au', "an_util"],
+    ['g', 'git']
+]
 
 
 def _get_scripts():
     # why I need create this by hand??
     rst = create_console_script(*COMMANDS)
+    for item in COMMAND_MAP:
+        rst.append(_create_command(item[0], item[1]))
     if is_windows():
         rst.append(_create_command("l", "l"))
-    rst.append(_create_command("jvm", "jvm"))
-    rst.append(_create_command("an_util", "an_util"))
-    rst.append(_create_command("au", "an_util"))
-    rst.append(_create_command('cm', 'cm'))
-    rst.append(_create_command('path', 'path'))
     rst.append(_create_command('personal', 'personal.personal'))
     rst.append(_create_command('vcode', 'idea.vs'))
     rst.append(_create_command('acode', 'idea.idea_android'))

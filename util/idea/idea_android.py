@@ -2,10 +2,12 @@ import os
 from .idea_base import IdeaBase
 from ..app import App
 import configparser
-from util.util.util_find_program import find_program
+from util.util import is_windows
 
 
 def _get_android_home():
+    if not is_windows():
+        return ""
     local_ini_path = os.path.join(os.path.dirname(__file__), "../../local.ini")
     folder = ""
     if os.path.exists(local_ini_path):

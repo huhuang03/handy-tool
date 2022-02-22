@@ -18,6 +18,7 @@ def command_clean():
     path_cmake_cache = os.path.join(_dir, "CMakeCache.txt")
     _del(path_cmake_cache)
     _del(os.path.join(_dir, "CMakeFiles"))
+    _del(os.path.join(_dir, "_deps"))
 
 
 def clean():
