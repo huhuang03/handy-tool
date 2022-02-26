@@ -11,9 +11,10 @@ def main():
     args = parser.parse_args()
 
     os.system('git add .')
-    msg = input('Please input commit message: ')
-    if not msg:
-        msg = 'update'
-    os.system('git commit --no-verify -a -m "%s"' % msg)
+    # msg = input('Please input commit message: ')
+    # if not msg:
+    #     msg = 'update'
+    os.system('git commit -a')
+    # os.system('git commit --no-verify -a -m "%s"' % msg)
     if args.push:
         os.system('git push')
