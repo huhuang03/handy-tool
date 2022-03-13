@@ -5,6 +5,7 @@ import time
 from .get_apk import get_apk
 from .wifi import wifi
 from .push_cert import push_cert
+from util import util
 
 
 def _command_push_cert(sub_parser):
@@ -43,6 +44,7 @@ def main():
     parse_get_apk.add_argument("pkg_name", type=str, help="print apk sign info")
 
     subparser.add_parser("wifi", help="connect adb var wifi")
+    subparser.add_parser("ls", help="list all packages.")
 
     args = parser.parse_args()
     # do you want a map??
@@ -56,6 +58,16 @@ def main():
         wifi()
     elif args.command == "push_cert":
         push_cert(args)
+    elif args.command == "ls":
+        ls()
+
+
+def ls():
+    items = util.run_get_output("adb shell pm list packages -3")
+    items: [str] = items.split("\n")
+    pkgs = [item[len('package:'):] for item in items]
+    print(items)
+    pass
 
 
 if __name__ == "__main__":

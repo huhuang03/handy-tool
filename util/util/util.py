@@ -1,5 +1,11 @@
 import os
+import subprocess
 from sys import platform
+
+
+def run_get_output(cmd):
+    output = subprocess.getoutput(cmd)
+    return output
 
 
 def ensure_is_win():
