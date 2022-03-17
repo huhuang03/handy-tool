@@ -1,6 +1,7 @@
 # Look like that only work in myself situation?
 from .emacs_d import sync_emacs_d
 from .settings import settings
+from .sync_comm import sync_comm
 
 
 def _sync():
@@ -11,4 +12,5 @@ def _sync():
 
 
 def main():
-    print('should not be here')
+    print("ok, begin sync")
+    sync_comm()
