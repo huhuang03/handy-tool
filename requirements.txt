@@ -5,3 +5,4 @@ inquirer~=2.7.0
 future~=0.18.2
 PyYAML~=5.4.1
 pyjson5~=1.6.0.post1
+GitPython~=3.1.27

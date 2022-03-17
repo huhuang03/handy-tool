@@ -1,6 +1,8 @@
 import os
-import pyjson5 as json
+import json
 from .sync import _sync
+import argparse
+from .repo import RepoManager
 from util.util import is_mac, is_windows
 from .mac import mac_sync
 
@@ -24,7 +26,14 @@ def sync_windows_terminal():
 
 
 def main():
-    if is_mac():
-        mac_sync()
-    elif is_windows():
-        _sync()
+    # fk the boring subparsers.
+    # print("ok, begin sync")
+    parser = argparse.ArgumentParser(description="sync util")
+    subparser = parser.add_subparsers(dest="command")
+    # strange. how can I do this?
+    subparser.add_parser("repo")
+    RepoManager.init_parser(subparser)
+
+    args = parser.parse_args()
+    if args.command == "repo":
+        RepoManager(subparser).run(args)

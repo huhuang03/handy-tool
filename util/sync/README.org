@@ -1,3 +1,7 @@
+I need
+
+The config can be diff on every config.yaml.
+
 * How can I sync the private info
 
 For example content in $profile has some private content.

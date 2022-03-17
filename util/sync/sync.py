@@ -1,7 +1,8 @@
 # Look like that only work in myself situation?
 from .emacs_d import sync_emacs_d
 from .settings import settings
-from .sync_comm import sync_comm
+import argparse
+from .repo import RepoManager
 
 
 def _sync():
@@ -11,6 +12,3 @@ def _sync():
     sync_emacs_d()
 
 
-def main():
-    print("ok, begin sync")
-    sync_comm()

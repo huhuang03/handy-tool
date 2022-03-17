@@ -22,11 +22,12 @@ COMMANDS = [
     "gitup", 'done', "gettopactivity", "ip", "merged_rm",
     "lg", 'utf8_2_utf8bom', "save_space", 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
-    'sync1', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
+    'junk_file', 'jvm', 'an_util', 'cm', 'path']
 
 COMMAND_MAP = [
     ['au', "an_util"],
-    ['g', 'git']
+    ['g', 'git'],
+    ['sy', 'sync']
 ]
 
 
