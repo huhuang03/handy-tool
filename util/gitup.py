@@ -15,6 +15,7 @@ def main():
 
     os.system('git add .')
 
+    print(f"args.msg: {args.msg}")
     if args.msg:
         os.system('git commit -a')
     else:
