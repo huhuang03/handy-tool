@@ -9,9 +9,10 @@ JET_BRAIN_FOLDER_NAME = "JetBrains"
 
 
 class IDeaJetBrains(IdeaBase):
-    def __init__(self, folder_name, exe_name=''):
-        self.folder_name = folder_name
-        self.exe_name = exe_name or self.folder_name
+    def __init__(self, win_folder, win_exe_name='', mac_app_folder_name = ''):
+        self.folder_name = win_folder
+        self.exe_name = win_exe_name or self.folder_name
+        self.mac_app_folder_name = mac_app_folder_name or win_folder
         if is_windows():
             self.jet_brain_folders = find_program(JET_BRAIN_FOLDER_NAME)
 
@@ -38,9 +39,11 @@ class IDeaJetBrains(IdeaBase):
     def get_exe_in_mac(self) -> str:
         if is_windows():
             return ""
+        if not self.mac_app_folder_name:
+            return ""
         folder = "/Applications"
         for f in os.listdir(folder):
-            if self.exe_name in f.lower() and f.endswith(".app"):
+            if self.mac_app_folder_name in f.lower() and f.endswith(".app"):
                 return os.path.join(folder, f)
         return ""
 
