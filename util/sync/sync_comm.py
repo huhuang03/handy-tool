@@ -1,6 +1,5 @@
 import imp
 
-
 import os
 
 def sync_comm():
