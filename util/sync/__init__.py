@@ -25,6 +25,13 @@ def sync_windows_terminal():
     print(data)
 
 
+# how to do this?
+def sync_git_autocomplete():
+    # how can I do this?
+    
+    pass
+
+
 def main():
     # fk the boring subparsers.
     # print("ok, begin sync")
