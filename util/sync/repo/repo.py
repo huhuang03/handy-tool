@@ -9,8 +9,8 @@ repo_path_list = []
 # I don't want use something like global, so I use class. fuck
 # How do you think about the setting format?
 # separate of combine?
-#
-
+# class is boring?
+# use function again.
 class RepoManager:
     def __init__(self, subparser):
         self.repo_path_list = self.load()

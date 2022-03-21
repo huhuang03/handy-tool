@@ -2,7 +2,6 @@
 from .emacs_d import sync_emacs_d
 from .settings import settings
 import argparse
-from .repo import RepoManager
 
 
 def _sync():

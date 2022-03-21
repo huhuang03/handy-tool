@@ -1,10 +1,11 @@
 import os
+import sys
 import json
 from .sync import _sync
 import argparse
-from .repo import RepoManager
 from util.util import is_mac, is_windows
 from .mac import mac_sync
+from . import repo
 
 
 def _get_root_path():
@@ -28,7 +29,6 @@ def sync_windows_terminal():
 # how to do this?
 def sync_git_autocomplete():
     # how can I do this?
-    
     pass
 
 
@@ -37,10 +37,13 @@ def main():
     # print("ok, begin sync")
     parser = argparse.ArgumentParser(description="sync util")
     subparser = parser.add_subparsers(dest="command")
+    repo.init_subparser(subparser)
+    args = parser.parse_args(sys.argv[1:])
+    args.func(args)
     # strange. how can I do this?
-    subparser.add_parser("repo")
-    RepoManager.init_parser(subparser)
+    # subparser.add_parser("repo")
+    # RepoManager.init_parser(subparser)
 
-    args = parser.parse_args()
-    if args.command == "repo":
-        RepoManager(subparser).run(args)
+    # args = parser.parse_args()
+    # if args.command == "repo":
+    #     RepoManager(subparser).run(args)
