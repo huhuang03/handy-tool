@@ -1,7 +1,7 @@
 import os
 import sys
 import json
-from .sync import _sync
+# from .sync import _sync
 import argparse
 from util.util import is_mac, is_windows
 from .mac import mac_sync
