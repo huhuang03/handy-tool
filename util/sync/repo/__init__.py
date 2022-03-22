@@ -1,4 +1,5 @@
 from .add import add
+from .repo_list import repo_list
 
 
 def init_subparser(subparser):
@@ -8,11 +9,11 @@ def init_subparser(subparser):
     """
     repo_parser = subparser.add_parser("repo")
     repo_subparser = repo_parser.add_subparsers()
-    add_parser = repo_subparser.add_parser('add')
-    add_parser.add_argument('-foo')
-    # you can not called?
-    add_parser.set_defaults(func=add)
-    # how to call you?
 
-    subparser.add_parser('list')
+    add_parser = repo_subparser.add_parser('add')
+    add_parser.set_defaults(func=add)
+
+    list_parser = repo_subparser.add_parser('list')
+    list_parser.set_defaults(func=repo_list)
+
     subparser.add_parser('sync')
