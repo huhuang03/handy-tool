@@ -1,6 +1,6 @@
 from .add import add
 from .repo_list import repo_list
-from .state import state
+from .status import status
 
 
 def init_subparser(subparser):
@@ -17,10 +17,10 @@ def init_subparser(subparser):
     list_parser = repo_subparser.add_parser('list')
     list_parser.set_defaults(func=repo_list)
 
-    state_parser = repo_subparser.add_parser('state')
-    state_parser.set_defaults(func=state)
+    status_parser = repo_subparser.add_parser('status')
+    status_parser.set_defaults(func=status)
 
-    state_parser = repo_subparser.add_parser('st')
-    state_parser.set_defaults(func=state)
+    status_parser = repo_subparser.add_parser('st')
+    status_parser.set_defaults(func=status)
 
     subparser.add_parser('sync')
