@@ -1,6 +1,7 @@
 from .add import add
 from .repo_list import repo_list
 from .status import status
+from .remove import remove
 
 
 def init_subparser(subparser):
