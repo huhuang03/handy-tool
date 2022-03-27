@@ -1,6 +1,8 @@
+import sys
+
 from git import Repo
 from . import comm
-import subprocess
+from util.util import print_red, print_green
 
 
 def status(args):
@@ -10,8 +12,9 @@ def status(args):
         if not first:
             print("")
         print(f"-------- {repo}")
-        subprocess.run("git status", shell=True, cwd=repo)
-        _check_repo(repo)
+        rst = _check_repo(repo)
+        if rst:
+            print(f"ok")
         first = False
 
 
@@ -23,8 +26,17 @@ def _check_repo(repo_path):
     """
     repo = Repo.init(repo_path)
     if repo.is_dirty():
-        print("is dirty!!!!!")
+        print_red("is dirty!!")
         return False
-    if repo.head.ref != repo.refs['origin/master']:
-        print("look have some thing not commit!")
-    return True
+    # what's this?
+    commit_ahead = repo.iter_commits("origin/master..master")
+
+    unpushed_commit_count = 0
+    if commit_ahead:
+        unpushed_commit_count = sum(1 for _ in commit_ahead)
+
+    if unpushed_commit_count > 0:
+        print_red(f"Your branch is ahead {unpushed_commit_count} commits")
+        return False
+    else:
+        return True
