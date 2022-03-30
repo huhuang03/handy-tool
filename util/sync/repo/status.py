@@ -1,5 +1,3 @@
-import sys
-
 from git import Repo
 from . import comm
 from util.util import print_red, print_green
@@ -14,7 +12,7 @@ def status(args):
         print(f"-------- {repo}")
         rst = _check_repo(repo)
         if rst:
-            print(f"ok")
+            print_green(f"ok")
         first = False
 
 
@@ -28,8 +26,9 @@ def _check_repo(repo_path):
     if repo.is_dirty():
         print_red("is dirty!!")
         return False
+    remote_name = _get_master_track_remote(repo)
     # what's this?
-    commit_ahead = repo.iter_commits("origin/master..master")
+    commit_ahead = repo.iter_commits(f"{remote_name}/master..master")
 
     unpushed_commit_count = 0
     if commit_ahead:
@@ -40,3 +39,15 @@ def _check_repo(repo_path):
         return False
     else:
         return True
+
+
+def _get_master_track_remote(repo):
+    """
+    get master branch's track remote.
+    """
+    # empty_repo.heads.master.set_tracking_branch(origin.refs.master)
+    master = repo.heads.master
+    remote_master = master.tracking_branch()
+    if remote_master is None:
+        return "origin"
+    return remote_master.remote_name
