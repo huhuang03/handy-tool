@@ -27,6 +27,7 @@ def _check_repo(repo_path):
         print_red("is dirty!!")
         return False
     remote_name = _get_master_track_remote(repo)
+    _get_track_remote(repo, "main")
     # what's this?
     commit_ahead = repo.iter_commits(f"{remote_name}/master..master")
 
@@ -44,6 +45,7 @@ def _check_repo(repo_path):
 def _get_master_track_remote(repo):
     """
     get master branch's track remote.
+    can you get any other repo?
     """
     # empty_repo.heads.master.set_tracking_branch(origin.refs.master)
     master = repo.heads.master
@@ -51,3 +53,11 @@ def _get_master_track_remote(repo):
     if remote_master is None:
         return "origin"
     return remote_master.remote_name
+
+
+def _get_track_remote(repo, local_branch_name):
+    # TODO: how to get current branch?
+    # for repo in repo.heads:
+    #     if repo.name == local_branch_name:
+    print(repo.heads)
+    pass
