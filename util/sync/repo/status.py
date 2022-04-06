@@ -26,38 +26,27 @@ def _check_repo(repo_path):
     if repo.is_dirty():
         print_red("is dirty!!")
         return False
-    remote_name = _get_master_track_remote(repo)
-    _get_track_remote(repo, "main")
-    # what's this?
-    commit_ahead = repo.iter_commits(f"{remote_name}/master..master")
+
+    try:
+        check_branch(repo, repo.head.ref)
+        check_branch(repo, repo.refs['master'])
+    except RuntimeError as err:
+        print_red(err.args[0])
+    print_green("ok")
+
+
+def check_branch(repo, local_ref):
+    """
+    throw msg exction when not up to date.
+    """
+    tracking_branch = local_ref.tracking_branch()
+    if not tracking_branch:
+        raise RuntimeError(f"{local_ref} has no remote branch")
+    commit_ahead = repo.iter_commits(f"{tracking_branch}..{local_ref}")
 
     unpushed_commit_count = 0
     if commit_ahead:
         unpushed_commit_count = sum(1 for _ in commit_ahead)
 
     if unpushed_commit_count > 0:
-        print_red(f"Your branch is ahead {unpushed_commit_count} commits")
-        return False
-    else:
-        return True
-
-
-def _get_master_track_remote(repo):
-    """
-    get master branch's track remote.
-    can you get any other repo?
-    """
-    # empty_repo.heads.master.set_tracking_branch(origin.refs.master)
-    master = repo.heads.master
-    remote_master = master.tracking_branch()
-    if remote_master is None:
-        return "origin"
-    return remote_master.remote_name
-
-
-def _get_track_remote(repo, local_branch_name):
-    # TODO: how to get current branch?
-    # for repo in repo.heads:
-    #     if repo.name == local_branch_name:
-    print(repo.heads)
-    pass
+        raise RuntimeError(f"{local_ref} is ahead {unpushed_commit_count} commits")
