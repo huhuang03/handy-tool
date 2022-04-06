@@ -17,6 +17,7 @@ def status(args):
             print_red(err.args[0])
         else:
             print_green("ok")
+        print("")
 
 
 # I want check I have some unpushed commit
