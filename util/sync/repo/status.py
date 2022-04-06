@@ -10,10 +10,13 @@ def status(args):
         if not first:
             print("")
         print(f"-------- {repo}")
-        rst = _check_repo(repo)
-        if rst:
-            print_green(f"ok")
-        first = False
+
+        try:
+            _check_repo(repo)
+        except RuntimeError as err:
+            print_red(err.args[0])
+        else:
+            print_green("ok")
 
 
 # I want check I have some unpushed commit
@@ -24,15 +27,10 @@ def _check_repo(repo_path):
     """
     repo = Repo.init(repo_path)
     if repo.is_dirty():
-        print_red("is dirty!!")
-        return False
+        raise RuntimeError("is dirty!!")
 
-    try:
-        check_branch(repo, repo.head.ref)
-        check_branch(repo, repo.refs['master'])
-    except RuntimeError as err:
-        print_red(err.args[0])
-    print_green("ok")
+    check_branch(repo, repo.head.ref)
+    check_branch(repo, repo.refs['master'])
 
 
 def check_branch(repo, local_ref):
