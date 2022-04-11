@@ -1,6 +1,5 @@
 from typing import List
 import os
-import subprocess
 from .inner.db import add
 from ..util import reg
 
@@ -26,6 +25,9 @@ class UserScope:
                 exit(f"set new_path failed with {rst.stderr.decode('utf-8')}")
             else:
                 exit(f"set new_path failed")
+    
+    def get_path(self) -> List[str]:
+        return reg.get_path()
 
 
 user_scope = UserScope()
