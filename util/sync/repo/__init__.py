@@ -23,5 +23,3 @@ def init_subparser(subparser):
 
     status_parser = repo_subparser.add_parser('st')
     status_parser.set_defaults(func=status)
-
-    subparser.add_parser('sync')
