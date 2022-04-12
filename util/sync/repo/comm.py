@@ -1,3 +1,6 @@
+from .mode.repo_model import Repo
+import json
+from typing import List
 import os
 import util.util as util
 
@@ -9,10 +12,10 @@ def get_repo_list():
     return [f for f in content.split('\n') if f]
 
 
-def save_repo_list(path_list):
-    path = _get_config_path()
-    print(f'path: {path}')
-    util.write_file_content(path, "\n".join(path_list))
+def save_repo_list(repo_list: List[Repo]):
+    # how to save?
+    config_file_path = _get_config_path()
+    util.write_file_content(config_file_path, json.dumps(repo_list))
     
 
 def get_config_file_path():
