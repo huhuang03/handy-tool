@@ -2,6 +2,7 @@ from .add import add
 from .repo_list import repo_list
 from .status import status
 from .remove import remove
+from .clean import clean
 
 
 def init_subparser(subparser):
@@ -13,6 +14,7 @@ def init_subparser(subparser):
     repo_subparser = repo_parser.add_subparsers()
 
     add_parser = repo_subparser.add_parser('add')
+    add_parser.add_argument('--auto_commit', action="store_true")
     add_parser.set_defaults(func=add)
 
     list_parser = repo_subparser.add_parser('list')
@@ -23,3 +25,6 @@ def init_subparser(subparser):
 
     status_parser = repo_subparser.add_parser('st')
     status_parser.set_defaults(func=status)
+
+    clean_parser = repo_subparser.add_parser('clean')
+    clean_parser.set_defaults(func=clean)

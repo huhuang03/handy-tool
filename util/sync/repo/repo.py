@@ -1,6 +1,5 @@
 import os
 import subprocess
-from util import config
 import yaml
 
 repo_path_list = []
@@ -22,14 +21,6 @@ class RepoManager:
         subparser.add_subparsers(dest="command")
         pass
 
-    def run(self, arg):
-        # fk, I don't want to add subcommand again.
-        pass
-
-    def load(self) -> [str]:
-        # yaml.dump(self.)
-        return []
-
     def save(self):
         if not self.repo_path_list:
             return
@@ -50,7 +41,3 @@ class RepoManager:
 
             subprocess.call("git status", cwd=repo)
         print("done")
-
-    @staticmethod
-    def _config_file_path() -> str:
-        return config.expand("util.python/sync_repo.yml")
