@@ -38,6 +38,7 @@ def _check_repo(local_repo):
     if repo.is_dirty():
         if auto_commit:
             # try commit
+            # TODO check that diff files total size is < 5M, to avoid wrong upload big file.
             subprocess.Popen(['git', 'add', '.'], cwd=repo_dir).wait()
             subprocess.Popen(['git', 'commit', '-a', '-m', '"auto commit by repo check"'], cwd=repo_dir).wait()
             subprocess.Popen(['git', 'push'], cwd=repo_dir).wait()
