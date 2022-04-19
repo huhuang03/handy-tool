@@ -1,4 +1,5 @@
 import os
+import subprocess
 
 from git import Repo
 from . import comm
@@ -32,13 +33,14 @@ def _check_repo(local_repo):
     repo_path = local_repo[cons.KEY_PATH]
     auto_commit = local_repo[cons.KEY_AUTO_COMMIT]
     repo = Repo.init(repo_path)
+    repo_dir = repo_path
 
     if repo.is_dirty():
         if auto_commit:
             # try commit
-            os.system("git add .")
-            os.system('git commit -a -m "auto commit by repo check"')
-            os.system('git push')
+            subprocess.Popen(['git', 'add', '.'], cwd=repo_dir).wait()
+            subprocess.Popen(['git', 'commit', '-a', '-m', '"auto commit by repo check"'], cwd=repo_dir).wait()
+            subprocess.Popen(['git', 'push'], cwd=repo_dir).wait()
         else:
             raise RuntimeError("is dirty!!")
 

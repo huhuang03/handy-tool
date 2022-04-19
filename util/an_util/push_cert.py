@@ -19,7 +19,7 @@ def push_cert(args):
     os.system(f'adb push {renamed_cert_path} /sdcard/{cert_file_name}')
 
     # ok, read write the storage.
-    command = f"adb shell su -c 'mount -o rw,remount /'"
+    command = f"adb shell su -c 'mount -o rw,remount /system'"
     os.system(command)
 
     command = f"adb shell su -c 'cp /sdcard/{cert_file_name} /system/etc/security/cacerts/'"
