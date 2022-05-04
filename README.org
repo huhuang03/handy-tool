@@ -1,5 +1,6 @@
 The utils
 
+
 * Install
 #+BEGIN_SRC shell
 pip install -e .
@@ -60,6 +61,7 @@ junk_file 10G9M
 #+END_SRC
 *** TODOS
 - add option -random, fill the junk file with random value.
+- do you want serpate sync project?
 
 *** permission define
 When create in driver ~C:~, there's a permission deny issue. You can run in a ~Run as amin~ powershell to

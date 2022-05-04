@@ -6,7 +6,7 @@ _BACKUP_MAX = 10
 
 def add(path):
     """
-    add path to backup, because we maybe mess up the path, so we need backup
+    add path to back up, because we maybe mess up the path, so we need backup
     :param path:
     :return:
     """
@@ -20,7 +20,8 @@ def add(path):
             paths += [l.strip() for l in f.readlines()]
 
     if len(paths) > _BACKUP_MAX:
-        paths = path[1:]
+        # what's this?
+        paths = paths[1:]
 
     paths.insert(0, path)
     with open(cache_file_path, 'w+') as f:
