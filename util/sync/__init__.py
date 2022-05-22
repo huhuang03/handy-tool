@@ -4,9 +4,11 @@ import json
 # from .sync import _sync
 import argparse
 from util.util import is_mac, is_windows
-from .mac import mac_sync
-from . import repo
 import urllib.request
+from .mac import mac_sync
+from .win import win_sync
+from . import repo
+from util.util import is_mac, is_windows
 
 
 def _get_root_path():
@@ -45,26 +47,12 @@ def main():
         args.func(args)
         return
 
-    sy_root_dir = os.path.expanduser("~/.sy")
-    os.makedirs(sy_root_dir, exist_ok=True)
-    shell = os.environ['SHELL']
-    remote_url = ""
-    if shell == "/bin/zsh":
-        remote_url = "https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.zsh"
-    else:
-        exit(f"can't handle shell: {shell}")
+    root_dir = os.path.expanduser("~/.sy")
+    if not os.path.exists(root_dir):
+        os.makedirs(root_dir, exist_ok=True)
 
-    file_name = remote_url.split("/")[-1]
-    # download to bash.
-    urllib.request.urlretrieve(remote_url, os.path.join(sy_root_dir, file_name))
+    if is_mac():
+        mac_sync(root_dir)
 
-    # complete the bash
-    source_command = "source ~/.sy/" + file_name
-
-    system_bash_path = os.path.expanduser("~/.zshrc")
-    with open(system_bash_path, "r") as f:
-        exist = source_command in f.read()
-
-    if not exist:
-        with open(system_bash_path, "a") as f:
-            f.writelines(["# added by .sy util\n", source_command])
+    if is_windows():
+        win_sync()
