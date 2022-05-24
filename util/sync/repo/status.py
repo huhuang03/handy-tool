@@ -35,7 +35,7 @@ def _check_repo(local_repo):
     repo = Repo.init(repo_path)
     repo_dir = repo_path
 
-    if repo.is_dirty():
+    if repo.is_dirty() or _has_uncommit(repo):
         if auto_commit:
             # try commit
             # TODO check that diff files total size is < 5M, to avoid wrong upload big file.
@@ -43,13 +43,22 @@ def _check_repo(local_repo):
             subprocess.Popen(['git', 'commit', '-a', '-m', '"auto commit by repo check"'], cwd=repo_dir).wait()
             subprocess.Popen(['git', 'push'], cwd=repo_dir).wait()
         else:
-            raise RuntimeError("is dirty!!")
+            _check_dirty_or_uncommit_with_throw(repo)
 
-    if repo.is_dirty():
-        raise RuntimeError("is dirty!!")
+    _check_dirty_or_uncommit_with_throw(repo)
 
     check_branch(repo, repo.head.ref, auto_commit)
     check_branch(repo, repo.refs['master'], auto_commit)
+
+def _check_dirty_or_uncommit_with_throw(repo):
+    if repo.is_dirty():
+        raise RuntimeError("is dirty!!")
+
+    if _has_uncommit(repo):
+        raise RuntimeError("has uncommit files")
+
+def _has_uncommit(repo):
+    return len(repo.untracked_files) > 0
 
 
 def check_branch(repo, local_ref, auto_commit):

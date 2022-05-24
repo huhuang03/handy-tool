@@ -24,3 +24,16 @@ def is_windows():
 
 def is_mac():
     return platform == 'darwin'
+
+def confirm(msg):
+    """
+    Ask user to enter Y or N (case-insensitive).
+    :return: True if the answer is Y.
+    :rtype: bool
+    """
+    answer = ""
+    while answer not in ["y", "n"]:
+        answer = input(f"${msg} [y/N]? ").lower()
+        if not answer:
+            answer = 'n'
+    return answer == "y"

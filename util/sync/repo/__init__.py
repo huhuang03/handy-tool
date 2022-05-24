@@ -1,8 +1,10 @@
+from sqlite3 import paramstyle
 from .add import add
 from .repo_list import repo_list
 from .status import status
 from .remove import remove
-from .clean import clean
+from .delete import delete
+from .pull import pull
 
 
 def init_subparser(subparser):
@@ -26,5 +28,8 @@ def init_subparser(subparser):
     status_parser = repo_subparser.add_parser('st')
     status_parser.set_defaults(func=status)
 
-    clean_parser = repo_subparser.add_parser('clean')
-    clean_parser.set_defaults(func=clean)
+    delete_parser = repo_subparser.add_parser('delete')
+    delete_parser.set_defaults(func=delete)
+
+    pull_parser = repo_subparser.add_parser('pull')
+    pull_parser.set_defaults(func=pull)
