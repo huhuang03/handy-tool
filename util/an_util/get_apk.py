@@ -1,18 +1,52 @@
 import os
 import re
 import subprocess
+from . import _util
 
+def init_args(subparser):
+    parse_get_apk = subparser.add_parser("get_apk", help="get apk by package name")
+    parse_get_apk.add_argument("-p", type=str, help="print apk sign info")
+    parse_get_apk.add_argument("-n", type=str, help="print apk sign info")
 
 def get_apk(args):
-    pkg_name = args.pkg_name
+    print(args)
+    pkg_name = args.p
+    app_name = args.n
+    if pkg_name:
+        rst = get_by_pkg_name(pkg_name)
+        if rst:
+            print("success extra apk")
+            return
+    elif app_name:
+        pkg_name = get_pkg_by_app_name()
+        rst = get_by_pkg_name(pkg_name)
+        if rst:
+            print("success extra apk")
+            return
+
+def get_app_name_by_pkg():
+    pass
+
+def get_pkg_by_app_name(app_name):
+    app_pkg_list = []
+    for pkg_name in app_pkg_list:
+        app_name = get_app_name_by_pkg(pkg_name)
+
+def get_by_pkg_name(pkg_name: str):
+    """
+    true if find some.
+    """
     commands = ["adb", "shell", "pm", "path", pkg_name]
     r_stdout = subprocess.run(commands, stdout=subprocess.PIPE).stdout
     if not r_stdout:
-        exit(f"Please check app {pkg_name} exist")
+        return False
     apk_inner_path = r_stdout.decode("utf-8").strip()
     apk_inner_path = re.search(re.compile("package:(.*)"), apk_inner_path).group(1)
-    print(apk_inner_path)
+
+    # let's do some can get by name.
+
     output_name = f"{pkg_name}.apk"
     if os.path.exists(output_name):
-        exit(f"file {output_name} already exist")
+        return False
     os.system(f"adb pull {apk_inner_path} {output_name}")
+    return True

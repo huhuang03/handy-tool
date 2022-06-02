@@ -6,6 +6,7 @@ from .get_apk import get_apk
 from .wifi import wifi
 from .push_cert import push_cert
 from util import util
+from . import get_apk
 
 
 def _command_push_cert(sub_parser):
@@ -35,13 +36,14 @@ def main():
     parser_push_cert = subparser.add_parser("push_cert", help="push cert file to system cert location(with rename it)")
     parser_push_cert.add_argument("cert_file_path", type=str, help="cert file(like charles cert file)")
 
+
+    get_apk.init_args(subparser)
+
     subparser.add_parser("screenshot", help="take a screenshot save name as current time milliseconds.")
 
     parser_get_sign = subparser.add_parser("get_sign", help="get sign info from apk file")
     parser_get_sign.add_argument("apk_file", type=str, help="print apk sign info")
 
-    parse_get_apk = subparser.add_parser("get_apk", help="get apk by package name")
-    parse_get_apk.add_argument("pkg_name", type=str, help="print apk sign info")
 
     subparser.add_parser("wifi", help="connect adb var wifi")
     subparser.add_parser("ls", help="list all packages.")
@@ -53,7 +55,7 @@ def main():
     elif args.command == "get_sign":
         get_sign(args)
     elif args.command == "get_apk":
-        get_apk(args)
+        get_apk.get_apk(args)
     elif args.command == "wifi":
         wifi()
     elif args.command == "push_cert":
