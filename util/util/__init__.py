@@ -1,13 +1,13 @@
-import os
-from .util import *
-from .util_find_program import *
 from . import reg
 from . import win
 from .bcolors import bcolors
+from .util import *
+from .util_find_program import *
 
 
 def expand_config_path(sub_folder: str) -> str:
     return os.path.abspath(os.path.expanduser(f"~/.config/{sub_folder}"))
+
 
 def write_file_content(path: str, content: str):
     dir_name = os.path.dirname(path)
@@ -16,6 +16,7 @@ def write_file_content(path: str, content: str):
 
     with open(path, 'w') as f:
         f.write(content)
+
 
 def get_file_content(path: str) -> str:
     """

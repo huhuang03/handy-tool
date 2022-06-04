@@ -3,10 +3,12 @@ import re
 import subprocess
 from . import _util
 
+
 def init_args(subparser):
     parse_get_apk = subparser.add_parser("get_apk", help="get apk by package name")
     parse_get_apk.add_argument("-p", type=str, help="print apk sign info")
     parse_get_apk.add_argument("-n", type=str, help="print apk sign info")
+
 
 def get_apk(args):
     print(args)
@@ -24,13 +26,16 @@ def get_apk(args):
             print("success extra apk")
             return
 
+
 def get_app_name_by_pkg():
     pass
+
 
 def get_pkg_by_app_name(app_name):
     app_pkg_list = []
     for pkg_name in app_pkg_list:
         app_name = get_app_name_by_pkg(pkg_name)
+
 
 def get_by_pkg_name(pkg_name: str):
     """
@@ -42,8 +47,6 @@ def get_by_pkg_name(pkg_name: str):
         return False
     apk_inner_path = r_stdout.decode("utf-8").strip()
     apk_inner_path = re.search(re.compile("package:(.*)"), apk_inner_path).group(1)
-
-    # let's do some can get by name.
 
     output_name = f"{pkg_name}.apk"
     if os.path.exists(output_name):

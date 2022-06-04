@@ -1,6 +1,6 @@
-import imp
-from an_util import util
+from .. import util
 from typing import List
+
 
 def get_pkgs():
     items = util.run_get_output("adb shell pm list packages -3")
