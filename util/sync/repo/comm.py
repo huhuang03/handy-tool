@@ -1,7 +1,6 @@
 import json
 
 import yaml
-from yaml import CLoader
 
 import util.util as util
 
@@ -12,7 +11,7 @@ _REPO_KEY = "repos"
 def get_repo_list():
     # how do this?
     content = util.get_file_content(_get_config_path()).strip()
-    loaded = yaml.load(content, Loader=CLoader)
+    loaded = yaml.safe_load(content)
     if not loaded:
         return []
     if _REPO_KEY in loaded:

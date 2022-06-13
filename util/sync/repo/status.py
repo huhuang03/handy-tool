@@ -48,7 +48,8 @@ def _check_repo(local_repo):
     _check_dirty_or_uncommit_with_throw(repo)
 
     check_branch(repo, repo.head.ref, auto_commit)
-    check_branch(repo, repo.refs['master'], auto_commit)
+    if 'master' in repo.refs:
+        check_branch(repo, repo.refs['master'], auto_commit)
 
 def _check_dirty_or_uncommit_with_throw(repo):
     if repo.is_dirty():
