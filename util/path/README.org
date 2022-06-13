@@ -1,0 +1,6 @@
+we need change the reg operatro to this!
+
+#+BEGIN_SRC python
+env_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, "Environment")
+path_value = winreg.QueryValueEx(env_key, "Path")
+#+END_SRC
