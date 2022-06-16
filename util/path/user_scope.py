@@ -10,6 +10,7 @@ class UserScope:
         path = path.replace('\n', '')
         return path
 
+    # to be replace by utils.py
     def set_path(self, path: List[str]):
         add(";".join(path))
         return reg.save_path(path)
