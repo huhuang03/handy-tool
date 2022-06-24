@@ -1,14 +1,18 @@
 import argparse
 import sys
+import os
+from tkinter import W
 
 from .clean import do_clean
 from .user_scope import user_scope
 from ..util.util import ensure_is_win
+from ..util import reg
+from . import util as util_path
 
 
 def _do_list(arg):
-    path_list, _ = user_scope.get_path()
-    print('\n'.join(path_list))
+    print(util_path.get_path_list())
+    print("\n".join(util_path.get_path_list()))
 
 
 def remove(arg):
@@ -19,8 +23,26 @@ def remove(arg):
     pass
 
 
+
 def add(arg):
-    user_scope.add_cwd_to_path()
+    path_list = util_path.get_path_list()
+    path_list = [util_path.format_path(p) for p in path_list]
+
+    # do deduplication manually
+    dedup_path_list = []
+    for p in path_list:
+        if p not in dedup_path_list:
+            dedup_path_list.append(p)
+    path_list = dedup_path_list
+    print(f'path_list: {path_list}')
+    
+    to_add_path = os.getcwd()
+    if to_add_path in path_list:
+        print("already exist in path")
+        return
+    path_list.append(to_add_path)
+    reg.set_env_value("Path", ";".join(path_list))
+    print('done')
 
 
 def main():
