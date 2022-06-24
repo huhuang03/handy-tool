@@ -9,7 +9,10 @@ _reserve_branch = ["*", "dev", "main", "master", "release"]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("-c", action=argparse.BooleanOptionalAction, help="compare to current branch")
+    if hasattr(argparse, 'BooleanOptionalAction'):
+        parser.add_argument("-c", action=argparse.BooleanOptionalAction, help="compare to current branch")
+    else:
+        parser.add_argument("-c", action='store_true', help="compare to current branch")
 
     args = parser.parse_args()
 
