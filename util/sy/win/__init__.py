@@ -4,9 +4,17 @@ import subprocess
 
 # set-executionpolicy RemoteSigned call this in admin mode
 _CONTENT = """
-Import-Module PSReadLine
-Set-PSReadLineOption -PredictionSource History
-Set-PSReadlineKeyHandler -Key Tab -Function MenuComplete
+function doJump {
+    $Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890"
+}
+
+function doUnJump {
+    Remove-Item Env:http_proxy
+    Remove-Item Env:https_proxy
+}
+
+New-Alias jump doJump
+New-Alias unjump doUnJump
 """
 
 

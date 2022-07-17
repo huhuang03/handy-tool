@@ -1,5 +1,8 @@
-The utils
+Some Utils.
 
+| executable | desc                   | win | linux |
+|------------+------------------------+-----+-------|
+| pvm        | python version manager | Y   | N     |
 
 * Install
 #+BEGIN_SRC shell

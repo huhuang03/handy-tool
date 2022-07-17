@@ -1,6 +1,5 @@
 import os
-from .. import util as _util
-
+from ...sy import util as _util
 
 _CONTENT = """alias jump='export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890'
 alias p3=python3

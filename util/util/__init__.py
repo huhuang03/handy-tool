@@ -2,6 +2,7 @@ from . import reg
 from . import win
 from .bcolors import bcolors
 from .util import *
+from .util_os import *
 from .util_find_program import *
 
 

@@ -2,7 +2,7 @@ import os
 from .idea_base import IdeaBase
 from ..util.util_find_program import find_program
 from ..app import App
-from ..util.util import is_mac, is_windows
+from ..util.util_os import is_mac, is_windows
 
 
 JET_BRAIN_FOLDER_NAME = "JetBrains"

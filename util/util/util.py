@@ -1,6 +1,5 @@
 import os
 import subprocess
-from sys import platform
 
 
 def run_get_output(cmd):
@@ -18,12 +17,6 @@ def add_to_clip_board(text):
     os.system(command)
 
 
-def is_windows():
-    return platform == 'win32'
-
-
-def is_mac():
-    return platform == 'darwin'
 
 def confirm(msg):
     """

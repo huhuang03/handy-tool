@@ -1,6 +1,5 @@
-import imp
 from .comm import save_repo_list
-from .. import util
+from ...sy import util
 
 
 def delete(args):

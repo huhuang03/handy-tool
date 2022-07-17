@@ -3,10 +3,8 @@ import sys
 import json
 # from .sync import _sync
 import argparse
-from util.util import is_mac, is_windows
-import urllib.request
 from .mac import mac_sync
-from .win import win_sync
+from util.sy.win import win_sync
 from . import repo
 from util.util import is_mac, is_windows
 
