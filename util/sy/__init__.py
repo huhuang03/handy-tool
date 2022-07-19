@@ -1,11 +1,12 @@
-# how to do this?
-# why you can work?
-from util.util.util_os import is_windows
-from .win import win_sync
+from util.util.util_os import is_windows, is_mac
 
 
 def main():
     if is_windows():
+        from .win import win_sync
         win_sync()
+    elif is_mac():
+        from .mac import mac_sync
+        mac_sync()
     else:
-        print("only support win now")
+        print("unsupport os")
