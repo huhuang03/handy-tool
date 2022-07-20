@@ -1,56 +1,45 @@
-import os
-import sys
-import json
-# from .sync import _sync
 import argparse
-from .mac import mac_sync
-from util.sy.win import win_sync
-from . import repo
-from util.util import is_mac, is_windows
-
-
-def _get_root_path():
-    home = os.path.expanduser('~/AppData/Local/Packages')
-    # ok, find the home
-    for path in os.listdir(home):
-        if path.startswith('Microsoft.WindowsTerminal'):
-            return os.path.join(home, path)
-    return ''
-
-
-def sync_windows_terminal():
-    root = _get_root_path()
-    if not root:
-        exit('can\'t find window terminal home directory')
-    settings_path = os.path.join(root, 'LocalState', 'settings.json')
-    data = json.load(open(settings_path))
-    print(data)
-
-
-# how to do this?
-def sync_git_autocomplete():
-    # how can I do this?
-    pass
-
+from asyncio import subprocess
+from curses import init_pair
+from sqlite3 import paramstyle
+from .add import add
+from .repo_list import repo_list
+from .status import status
+from .remove import remove
+from .delete import delete
+from .pull import pull
 
 def main():
-    # fk the boring subparsers.
-    # print("ok, begin sync")
-    parser = argparse.ArgumentParser(description="sync util")
-    subparser = parser.add_subparsers(dest="command")
-    repo.init_subparser(subparser)
+    parser = argparse.ArgumentParser(description="repo util")
+    init_subparser(parser)
+    args = parser.parse_args()
+    print(args)
+    args.func(args)
+    # how to run?
 
-    args = parser.parse_args(sys.argv[1:])
-    if args.command == 'repo':
-        args.func(args)
-        return
 
-    root_dir = os.path.expanduser("~/.sy")
-    if not os.path.exists(root_dir):
-        os.makedirs(root_dir, exist_ok=True)
+def init_subparser(subparser):
+    """
+    Initial the subparser.
+    @parm subparser the result of parser.Argparser().add_subparser()
+    """
+    repo_subparser = subparser.add_subparsers()
 
-    if is_mac():
-        mac_sync(root_dir)
+    add_parser = repo_subparser.add_parser('add')
+    add_parser.add_argument('--auto_commit', action="store_true")
+    add_parser.set_defaults(func=add)
 
-    if is_windows():
-        win_sync()
+    list_parser = repo_subparser.add_parser('list')
+    list_parser.set_defaults(func=repo_list)
+
+    status_parser = repo_subparser.add_parser('status')
+    status_parser.set_defaults(func=status)
+
+    status_parser = repo_subparser.add_parser('st')
+    status_parser.set_defaults(func=status)
+
+    delete_parser = repo_subparser.add_parser('delete')
+    delete_parser.set_defaults(func=delete)
+
+    pull_parser = repo_subparser.add_parser('pull')
+    pull_parser.set_defaults(func=pull)

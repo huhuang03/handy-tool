@@ -1,5 +1,5 @@
 from .comm import save_repo_list
-from ...sy import util
+from util import util
 
 
 def delete(args):

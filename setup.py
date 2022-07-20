@@ -1,6 +1,5 @@
-from util.util import is_windows
+from util.util.util_os import is_windows
 from setuptools import setup
-import os
 
 
 def create_console_script(*names):
@@ -12,11 +11,6 @@ def create_console_script(*names):
 
 def _create_command(name, file_path):
     return f'{name} = util.{file_path}:main'
-
-
-def _create_jetbrains_command(name):
-    return '{} = util.jet_brains:main'.format(name)
-
 
 COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm',
