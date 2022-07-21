@@ -18,6 +18,7 @@ New-Alias jump doJump
 New-Alias unjump doUnJump
 """
 
+
 def _back():
     """@:param root the source files root"""
     profile_path = subprocess.run(["powershell", "-c", "echo $profile"], capture_output=True, text=True).stdout.strip()
@@ -35,6 +36,7 @@ def _back():
         f.write(_CONTENT)
 
     _util.insert_if_not_exist(profile_path, _CONTENT)
+
 
 def win_sync():
     git_sync()
