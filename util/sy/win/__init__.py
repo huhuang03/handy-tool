@@ -1,5 +1,6 @@
 import os.path
 from .. import util as _util
+from ..comm import git_sync
 import subprocess
 
 # set-executionpolicy RemoteSigned call this in admin mode
@@ -17,8 +18,7 @@ New-Alias jump doJump
 New-Alias unjump doUnJump
 """
 
-
-def win_sync():
+def _back():
     """@:param root the source files root"""
     profile_path = subprocess.run(["powershell", "-c", "echo $profile"], capture_output=True, text=True).stdout.strip()
 
@@ -35,3 +35,6 @@ def win_sync():
         f.write(_CONTENT)
 
     _util.insert_if_not_exist(profile_path, _CONTENT)
+
+def win_sync():
+    git_sync()
