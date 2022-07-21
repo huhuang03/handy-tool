@@ -1,5 +1,4 @@
 # import subprocess as sp
-import os
 import subprocess
 
 
@@ -24,10 +23,10 @@ def run_admin_in_powershell(command):
     # prog.communicate()
 
 
-def mklink(from_, to):
+def mklink(real_file, to):
     """
     make a soft link
     """
-    command = f'New-Item -Path {to} -ItemType SymbolicLink -Value {from_}'
+    command = f'New-Item -Path {to} -ItemType SymbolicLink -Value {real_file}'
     exit(f'For now, cal it manually: {command}')
     # run_admin_in_powershell()

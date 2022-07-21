@@ -10,4 +10,5 @@ def git_sync():
     _git_alias_item("ci", "commit")
     _git_alias_item("st", "status")
     _git_alias_item("br", "branch")
-    print("config git alias finish")
+    os.system(f"git config --global core.autocrlf false")
+    print("config git finish finish")
