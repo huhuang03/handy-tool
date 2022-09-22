@@ -20,12 +20,9 @@ def _write_sync_file():
     src_folder = os.path.join(os.path.dirname(__file__), "asset")
     # do you have better idea to sync folder?
     # why you can't copy?
-    print(os.listdir(src_folder))
-    print(src_folder)
-    print(sync_folder)
     shutil.copytree(src_folder, sync_folder, dirs_exist_ok=True)
 
     # check exits and write if not.
     # with open(sync_bash_path, 'w') as f:
     #     f.write(_CONTENT)
-    _util.insert_source_command(os.path.expanduser("~/.zshrc"), "source .sy/.sy.zshrc")
+    _util.insert_source_command(os.path.expanduser("~/.zshrc"), "source ~/.sy/.sy.zshrc")
