@@ -1,5 +1,5 @@
 import os
-from .. import util as util_path
+from ..util import util as util_path
 
 
 def do_clean(arg):

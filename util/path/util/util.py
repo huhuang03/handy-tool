@@ -1,7 +1,7 @@
 from operator import contains
 from re import I
 from util.util.util_find_program import find_files_iter
-from ..util import reg
+from ...util import reg
 
 def get_path_list():
     path_list = reg.get_value_current_user("Environment", "Path")
