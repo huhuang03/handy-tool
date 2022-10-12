@@ -1,4 +1,4 @@
-from .idea_jebrain import IDeaJetBrains
+from .idea_jetbrain import IDeaJetBrains
 
 
 class IdeaIntellij(IDeaJetBrains):
