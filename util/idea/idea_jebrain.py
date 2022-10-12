@@ -43,7 +43,7 @@ class IDeaJetBrains(IdeaBase):
             return ""
         folder = "/Applications"
         for f in os.listdir(folder):
-            if self.mac_app_folder_name in f.lower() and f.endswith(".app"):
+            if self.mac_app_folder_name.lower() in f.lower() and f.endswith(".app"):
                 return os.path.join(folder, f)
         return ""
 
