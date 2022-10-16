@@ -10,8 +10,7 @@ from ..util import reg
 from . import util as util_path
 
 
-def _do_list(arg):
-    print(util_path.get_path_list())
+def _list(arg):
     print("\n".join(util_path.get_path_list()))
 
 
@@ -21,7 +20,6 @@ def remove(arg):
         print(p)
     print(path_list)
     pass
-
 
 
 def add(arg):
@@ -35,7 +33,7 @@ def add(arg):
             dedup_path_list.append(p)
     path_list = dedup_path_list
     print(f'path_list: {path_list}')
-    
+
     to_add_path = os.getcwd()
     if to_add_path in path_list:
         print("already exist in path")
@@ -54,7 +52,7 @@ def main():
     clean_parser.set_defaults(func=do_clean)
 
     list_parser = subparser.add_parser('list')
-    list_parser.set_defaults(func=_do_list)
+    list_parser.set_defaults(func=_list)
 
     add_parser = subparser.add_parser('add')
     add_parser.set_defaults(func=add)

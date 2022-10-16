@@ -1,6 +1,8 @@
 from importlib.resources import open_binary
 import winreg
 import subprocess
+
+
 # reg is reg. nothing else. what can you provide?
 
 def get_value_current_user(sub_key: str, name: str):

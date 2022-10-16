@@ -13,9 +13,7 @@ def main():
     parser = argparse.ArgumentParser(description="repo util")
     init_subparser(parser)
     args = parser.parse_args()
-    print(args)
     args.func(args)
-    # how to run?
 
 
 def init_subparser(subparser):

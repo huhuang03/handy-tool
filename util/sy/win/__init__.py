@@ -1,8 +1,8 @@
+import subprocess
 import os.path
 from .. import util as _util
 from ..comm import git_sync
-import subprocess
-from util.util.win import mklink
+from .init_wt import init_wt
 
 # set-executionpolicy RemoteSigned call this in admin mode
 _CONTENT = """
@@ -65,3 +65,5 @@ def _init_windows_terminal():
 def win_sync():
     git_sync()
     _init_windows_terminal()
+    # we not finish init_wt, because I can't think about how to set start fodler.
+    # init_wt()

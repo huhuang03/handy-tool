@@ -3,6 +3,7 @@ from re import I
 from util.util.util_find_program import find_files_iter
 from ...util import reg
 
+
 def get_path_list():
     path_list = reg.get_value_current_user("Environment", "Path")
     return [f for f in path_list.split(";") if f]
@@ -22,6 +23,7 @@ def format_path(path: str) -> str:
     if path.endswith("/"):
         return path[:-1]
     return path
+
 
 def contains_env(path: str) -> bool:
     find_first = path.find("%")
