@@ -1,6 +1,7 @@
 import os
 
 def sync_windows_terminal():
+    # ok, we need a lib support jsonc in python
     pass
 
 
