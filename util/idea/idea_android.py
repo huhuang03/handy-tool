@@ -1,8 +1,9 @@
+import argparse
 import os
 from .idea_base import IdeaBase
 from ..app import App
 import configparser
-from util.util import is_windows
+from util.util import is_windows, is_mac
 
 
 def _get_android_home():
@@ -27,15 +28,26 @@ def _get_android_home():
 
 
 class IdeaAndroid(IdeaBase):
-    """
-    TODO: If not specify the android home, we need search in all driver
-    """
+    def __init__(self, prefer_canary):
+        IdeaBase.__init__(self)
+        self.prefer_canary = prefer_canary
+
     def run(self, root):
-        App(_get_android_home(), "/Applications/Android Studio.app").start()
+        mac_path = "/Applications/Android Studio.app"
+        if is_mac():
+            if self.prefer_canary:
+                canary_path = "/Applications/Android Studio Canary.app"
+                if os.path.exists(canary_path):
+                    mac_path = canary_path
+        App(_get_android_home(), mac_path).start('.')
 
 
 def main():
-    IdeaAndroid().run('')
+    parser = argparse.ArgumentParser(prog='acode', description="quick open with android studio")
+    parser.add_argument('-c', '--canary', action='store_true',
+                        help='prefer open with canary')
+    args = parser.parse_args()
+    IdeaAndroid(args.canary).run('')
 
 
 if __name__ == '__main__':

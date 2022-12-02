@@ -44,9 +44,10 @@ class App:
         else:
             raise Exception(f"Not work on {platform}")
 
-    def start(self):
-        if len(sys.argv) >= 2:
-            dir_name = sys.argv[1]
-        else:
-            dir_name = "."
+    def start(self, dir_name=None):
+        if not dir_name:
+            if len(sys.argv) >= 2:
+                dir_name = sys.argv[1]
+        if not dir_name:
+            dir_name = '.'
         self.open_file(dir_name)

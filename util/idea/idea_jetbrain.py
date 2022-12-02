@@ -4,12 +4,11 @@ from ..util.util_find_program import find_program
 from ..app import App
 from ..util.util_os import is_mac, is_windows
 
-
 JET_BRAIN_FOLDER_NAME = "JetBrains"
 
 
 class IDeaJetBrains(IdeaBase):
-    def __init__(self, win_folder, win_exe_name='', mac_app_folder_name = ''):
+    def __init__(self, win_folder, win_exe_name='', mac_app_folder_name=''):
         self.folder_name = win_folder
         self.exe_name = win_exe_name or self.folder_name
         self.mac_app_folder_name = mac_app_folder_name or win_folder
