@@ -1,5 +1,5 @@
-alias jump="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
-alias unjump="unset http_proxy;unset http_proxys"
+alias c="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
+alias uc="unset http_proxy;unset http_proxys"
 autoload -Uz compinit && compinit
 
 COLOR_DEF=$'\e[0m'
@@ -17,6 +17,10 @@ function git_branch_name()
     echo $branch
   fi
 }
+
+eval "$(jump shell)"
+
+alias ii=open
 
 # Enable substitution in the prompt.
 # setopt prompt_subst

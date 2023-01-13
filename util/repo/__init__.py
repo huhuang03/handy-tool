@@ -6,7 +6,7 @@ from .add import add
 from .repo_list import repo_list
 from .status import status
 from .remove import remove
-from .delete import delete
+from .remove_all import remove_all
 from .pull import pull
 
 def main():
@@ -36,8 +36,12 @@ def init_subparser(subparser):
     status_parser = repo_subparser.add_parser('st')
     status_parser.set_defaults(func=status)
 
-    delete_parser = repo_subparser.add_parser('delete')
-    delete_parser.set_defaults(func=delete)
+    delete_parser = repo_subparser.add_parser('remove_all')
+    delete_parser.set_defaults(func=remove_all)
+
+    delete_parser = repo_subparser.add_parser('remove')
+    delete_parser.add_argument('path')
+    delete_parser.set_defaults(func=remove)
 
     pull_parser = repo_subparser.add_parser('pull')
     pull_parser.set_defaults(func=pull)

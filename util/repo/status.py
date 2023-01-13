@@ -32,6 +32,9 @@ def _check_repo(local_repo):
     """
     repo_path = local_repo[cons.KEY_PATH]
     auto_commit = local_repo[cons.KEY_AUTO_COMMIT]
+    if not os.path.exists(repo_path):
+        print(f"{repo_path} not exists")
+        return
     repo = Repo.init(repo_path)
     repo_dir = repo_path
 
