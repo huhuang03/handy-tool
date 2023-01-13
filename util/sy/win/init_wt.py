@@ -1,13 +1,8 @@
 import os
-
-def sync_windows_terminal():
-    # ok, we need a lib support jsonc in python
-    pass
+import json
 
 
 def _init_windows_terminal():
-    print(os.path.dirname(__file__))
-    return
     origin_folder = os.path.expanduser("~/AppData/Local/Packages/")
     for f in os.listdir(origin_folder):
         if f.startswith("Microsoft.WindowsTerminal"):
@@ -16,29 +11,32 @@ def _init_windows_terminal():
     setting_file = os.path.join(origin_folder, 'settings.json')
     if not os.path.exists(setting_file):
         exit("why can't find windows.terminal settings.json")
-    # _create_windows_terminal_settings_link(origin_folder)
-    test_file_path = os.path.join(origin_folder, 'test.json')
-    print(os.path.exists(test_file_path))
-    # can I check this is a real file. not a folder?
+    # parse you!
+    with open(setting_file) as f:
+        json_setting = json.loads(f.read())
+    old_actions = json_setting['actions']
+    has_changed = False
 
-
-def init_wt():
-    """Init windows terminal"""
-    # how about find latest powershell
-    start_menu_folder = os.path.join("c:\\", "ProgramData", "Microsoft", 'Windows', "Start Menu", "Programs",
-                                     "PowerShell")
-    has_powershell = os.path.exists(start_menu_folder)
-    if not has_powershell:
-        print("can't find powershell in start menu")
-    else:
-        powershell_path = ""
-        for f in os.listdir(start_menu_folder):
-            if "PowerShell" in f and not "preview" in f:
-                powershell_path = os.path.join(start_menu_folder, f)
-
-        has_powershell = not not powershell_path
-
-def _create_windows_terminal_settings_link(setting_dir: str):
-    setting_file = os.path.join(setting_dir, 'settings.json')
-    # ok, create symbolic link
-    # mklink(os.path.join(os.path.dirname(__file__), 'windows_terminal_config.json'), 'test.json')
+    def add_action(n_key, n_action, force=False):
+        nonlocal has_changed
+        has_changed = False
+        contains = False
+        for action in old_actions:
+            if action.keys == n_key:
+                contains = True
+                break
+        if not contains or force:
+            has_changed = True
+            old_actions.append({
+                "keys": n_key,
+                "command": n_action
+            })
+    add_action("ctrl+w", "closeTab", True)
+    add_action("ctrl+t", "newTab")
+    add_action("shift+alt+}", "nextTab")
+    add_action("shift+alt+{", "prevTab")
+    if has_changed:
+        with open(setting_file, 'w') as f:
+            if not f.writable():
+                return
+            f.write(json.dumps(json_setting, indent=4))

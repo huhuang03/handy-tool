@@ -6,7 +6,7 @@ import configparser
 from util.util import is_windows, is_mac
 
 
-def _get_android_home():
+def _get_android_home(prefer_canary=False):
     if not is_windows():
         return ""
     local_ini_path = os.path.join(os.path.dirname(__file__), "../../local.ini")
@@ -18,7 +18,11 @@ def _get_android_home():
     else:
         for i in range(ord('A'), ord('Z')):
             driver_name = str(chr(i)) + ":\\"
-            check_folder = os.path.join(driver_name, "Program Files", "Android", "Android Studio")
+            check_folder = None
+            if prefer_canary:
+                check_folder = os.path.join(driver_name, "Program Files", "Android", "Android Studio Preview")
+            if not check_folder:
+                check_folder = os.path.join(driver_name, "Program Files", "Android", "Android Studio")
             if os.path.exists(check_folder):
                 folder = check_folder
                 break
@@ -39,7 +43,7 @@ class IdeaAndroid(IdeaBase):
                 canary_path = "/Applications/Android Studio Canary.app"
                 if os.path.exists(canary_path):
                     mac_path = canary_path
-        App(_get_android_home(), mac_path).start('.')
+        App(_get_android_home(self.prefer_canary), mac_path).start('.')
 
 
 def main():
