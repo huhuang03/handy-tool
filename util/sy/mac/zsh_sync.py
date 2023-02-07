@@ -15,7 +15,6 @@ def _install_jump():
 
 
 def _write_sync_file():
-    _install_jump()
     sync_folder = os.path.expanduser(f'~/.sy')
     # write content to it.
     # copy folder to .sy
@@ -27,3 +26,4 @@ def _write_sync_file():
     shutil.copytree(src_folder, sync_folder, dirs_exist_ok=True)
 
     _util.insert_source_command(os.path.expanduser("~/.zshrc"), "source ~/.sy/.sy.zshrc")
+    _install_jump()
