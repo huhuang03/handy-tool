@@ -32,4 +32,6 @@ COLOR_DIR='%F{197}'
 COLOR_GIT='%F{39}'
 NEWLINE=$'\n'
 setopt PROMPT_SUBST
-export PROMPT='%d ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF}${NEWLINE}%% '
+
+# https://apple.stackexchange.com/questions/397027/how-to-change-my-command-prompt-to-show-current-working-directory
+export PROMPT='%1~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} %# '
