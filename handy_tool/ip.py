@@ -1,11 +1,21 @@
+import requests
 import os
 import json
 
 
+def try_baidu():
+    pass
+
+
+def try_ip_api():
+    data = os.popen('curl http://ip-api.com/json/').read()
+
+
 def main():
-    data = os.popen('curl https://freegeoip.app/json/').read()
-    if data == "":
-        print("get no ip address")
-    else:
-        data_json = json.loads(data)
-        print("ip: %s\ncountry: %s, city: %s" % (data_json["ip"], data_json["country_name"], data_json["city"]))
+    try_ip_api()
+    # data = os.popen('curl http://ip-api.com/json/').read()
+    # if data == "":
+    #     print("get no ip address")
+    # else:
+    #     data_json = json.loads(data)
+    #     print(f'ip:{data_json["query"]}\ncountry: {data_json["country_name"]}')
