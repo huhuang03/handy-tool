@@ -3,7 +3,7 @@ import subprocess
 
 from git import Repo
 from . import comm
-from util.util import print_red, print_green
+from handy_tool.util import print_red, print_green
 from . import cons
 
 

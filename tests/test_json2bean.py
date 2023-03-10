@@ -1,6 +1,6 @@
 import unittest
 # how to import json2bean.py
-import util.json2bean as j2
+import handy_tool.json2bean as j2
 
 
 class TestJson2Bean(unittest.TestCase):

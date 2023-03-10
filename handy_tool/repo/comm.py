@@ -2,7 +2,7 @@ import json
 
 import yaml
 
-import util.util as util
+import handy_tool.util as util
 
 _REPO_KEY = "repos"
 

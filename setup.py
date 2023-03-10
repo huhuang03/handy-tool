@@ -1,16 +1,19 @@
-from util.util.util_os import is_windows
+from handy_tool.util.util_os import is_windows
 from setuptools import setup
+
+PKG_NAME = 'handy_tool'
 
 
 def create_console_script(*names):
     rst = []
     for name in names:
-        rst.append(f'{name} = util.{name}:main')
+        rst.append(f'{name} = {PKG_NAME}.{name}:main')
     return rst
 
 
 def _create_command(name, file_path):
-    return f'{name} = util.{file_path}:main'
+    return f'{name} = {PKG_NAME}.{file_path}:main'
+
 
 COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm',

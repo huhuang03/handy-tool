@@ -3,7 +3,7 @@ import os
 from .idea_base import IdeaBase
 from ..app import App
 import configparser
-from util.util import is_windows, is_mac
+from handy_tool.util import is_windows, is_mac
 
 
 def _get_android_home(prefer_canary=False):

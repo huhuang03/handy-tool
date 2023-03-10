@@ -1,4 +1,4 @@
-from util import util
+from handy_tool import util
 import inquirer
 import os
 from .. import env
