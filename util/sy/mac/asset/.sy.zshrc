@@ -1,5 +1,6 @@
 alias jump="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
-alias uc="unset http_proxy;unset http_proxys"
+alias unjump="unset http_proxy;unset http_proxys"
+alias y=yarn
 autoload -Uz compinit && compinit
 
 COLOR_DEF=$'\e[0m'

@@ -1,14 +1,12 @@
-from encodings import search_function
-from genericpath import exists
 import os
 import shutil
+
 from ...sy import util as _util
 
 
 def zsh_sync():
     # how to do this?
     _write_sync_file()
-
 
 
 def _write_sync_file():

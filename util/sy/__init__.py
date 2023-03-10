@@ -1,5 +1,7 @@
 from util.util.util_os import is_windows, is_mac
 
+alias = [["git", 'g'], "yarn y"]
+
 
 def main():
     if is_windows():
@@ -10,8 +12,6 @@ def main():
         mac_sync()
     else:
         print("unsupport os")
-
-
 
 # def _get_root_path():
 #     home = os.path.expanduser('~/AppData/Local/Packages')
