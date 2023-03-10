@@ -45,9 +45,9 @@ def _get_scripts():
 
 
 setup(
-    name='python shell util',
-    version='1.0.0',
-    description='shell 简单工具',
+    name='handy tool',
+    version='0.0.1',
+    description='handy tool for daily use',
     entry_points={
         'console_scripts': _get_scripts()
     }
