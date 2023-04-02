@@ -3,7 +3,7 @@ import subprocess
 
 from git import Repo
 from . import comm
-from util.util import print_red, print_green
+from handy_tool.util import print_red, print_green
 from . import cons
 
 
@@ -32,6 +32,9 @@ def _check_repo(local_repo):
     """
     repo_path = local_repo[cons.KEY_PATH]
     auto_commit = local_repo[cons.KEY_AUTO_COMMIT]
+    if not os.path.exists(repo_path):
+        print(f"{repo_path} not exists")
+        return
     repo = Repo.init(repo_path)
     repo_dir = repo_path
 

@@ -1,5 +1,7 @@
 from .comm import git_sync
-from util.util.util_os import is_windows, is_mac
+from handy_tool.util.util_os import is_windows, is_mac
+
+alias = [["git", 'g'], "yarn y"]
 
 
 def main():

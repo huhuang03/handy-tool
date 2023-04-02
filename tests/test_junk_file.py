@@ -1,5 +1,5 @@
 import unittest
-from util.junk_file import _parse_size
+from handy_tool.junk_file import _parse_size
 
 
 class JunkFileTest(unittest.TestCase):

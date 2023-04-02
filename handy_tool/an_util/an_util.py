@@ -5,7 +5,7 @@ import time
 from .get_apk import get_apk
 from .wifi import wifi
 from .push_cert import push_cert
-from util import util
+from handy_tool import util
 from . import get_apk
 
 

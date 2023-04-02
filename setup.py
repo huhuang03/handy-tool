@@ -1,26 +1,30 @@
-from util.util.util_os import is_windows
+from handy_tool.util.util_os import is_windows
 from setuptools import setup
+
+PKG_NAME = 'handy_tool'
 
 
 def create_console_script(*names):
     rst = []
     for name in names:
-        rst.append(f'{name} = util.{name}:main')
+        rst.append(f'{name} = {PKG_NAME}.{name}:main')
     return rst
 
 
 def _create_command(name, file_path):
-    return f'{name} = util.{file_path}:main'
+    return f'{name} = {PKG_NAME}.{file_path}:main'
+
 
 COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm',
     'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
     'tt', 'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
-    'sy', 'repo', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
+    'sy', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
 
 COMMAND_MAP = [
     ['au', "an_util"],
-    ['g', 'git']
+    ['g', 'git'],
+    ['rp', 'repo']
 ]
 
 
@@ -44,9 +48,9 @@ def _get_scripts():
 
 
 setup(
-    name='python shell util',
-    version='1.0.0',
-    description='shell 简单工具',
+    name='handy tool',
+    version='0.0.1',
+    description='handy tool for daily use',
     entry_points={
         'console_scripts': _get_scripts()
     }

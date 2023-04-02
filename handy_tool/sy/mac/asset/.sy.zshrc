@@ -1,5 +1,6 @@
 alias jump="export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890"
 alias unjump="unset http_proxy;unset http_proxys"
+alias y=yarn
 autoload -Uz compinit && compinit
 
 COLOR_DEF=$'\e[0m'
@@ -18,8 +19,18 @@ function git_branch_name()
   fi
 }
 
-# Enable substitution in the prompt.
-# setopt prompt_subst
+alias ii=open
 
-# https://medium.com/pareture/simplest-zsh-prompt-configs-for-git-branch-name-3d01602a6f33
-# prompt='%1~ ${COLOR_GIT}$(git_branch_name)${COLOR_DEF} %# '
+
+parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/[\1]/p'
+}
+COLOR_DEF='%f'
+COLOR_USR='%F{243}'
+COLOR_DIR='%F{197}'
+COLOR_GIT='%F{39}'
+NEWLINE=$'\n'
+setopt PROMPT_SUBST
+
+# https://apple.stackexchange.com/questions/397027/how-to-change-my-command-prompt-to-show-current-working-directory
+export PROMPT='%1~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} %# '
