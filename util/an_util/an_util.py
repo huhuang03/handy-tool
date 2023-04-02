@@ -36,14 +36,12 @@ def main():
     parser_push_cert = subparser.add_parser("push_cert", help="push cert file to system cert location(with rename it)")
     parser_push_cert.add_argument("cert_file_path", type=str, help="cert file(like charles cert file)")
 
-
     get_apk.init_args(subparser)
 
     subparser.add_parser("screenshot", help="take a screenshot save name as current time milliseconds.")
 
     parser_get_sign = subparser.add_parser("get_sign", help="get sign info from apk file")
     parser_get_sign.add_argument("apk_file", type=str, help="print apk sign info")
-
 
     subparser.add_parser("wifi", help="connect adb var wifi")
     subparser.add_parser("ls", help="list all packages.")

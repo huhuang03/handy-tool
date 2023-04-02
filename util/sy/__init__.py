@@ -1,3 +1,4 @@
+from .comm import git_sync
 from util.util.util_os import is_windows, is_mac
 
 
@@ -9,9 +10,7 @@ def main():
         from .mac import mac_sync
         mac_sync()
     else:
-        print("unsupport os")
-
-
+        git_sync()
 
 # def _get_root_path():
 #     home = os.path.expanduser('~/AppData/Local/Packages')

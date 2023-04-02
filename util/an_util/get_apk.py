@@ -1,7 +1,7 @@
 import os
 import re
 import subprocess
-from . import _util
+from ._util import get_top_package
 
 
 def init_args(subparser):
@@ -11,7 +11,6 @@ def init_args(subparser):
 
 
 def get_apk(args):
-    print(args)
     pkg_name = args.p
     app_name = args.n
     if pkg_name:
@@ -25,6 +24,14 @@ def get_apk(args):
         if rst:
             print("success extra apk")
             return
+    else:
+        top_package = get_top_package()
+        if not top_package:
+            print("can not find which pacakge to export")
+            return
+        rst = get_by_pkg_name(top_package)
+        if rst:
+            print("success extra apk")
 
 
 def get_app_name_by_pkg():

@@ -7,3 +7,7 @@ def get_pkgs():
     items: List[str] = items.split("\n")
     pkgs = [item[len('package:'):] for item in items]
     return pkgs
+
+
+def get_top_package():
+    pass
