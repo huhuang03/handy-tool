@@ -16,7 +16,8 @@ def get_top_activity():
     windows_output = check_output(['adb', 'shell', 'dumpsys activity activities | grep ResumedActivity']).decode('utf-8')
     rst_line = windows_output.splitlines()[0]
     rst_line = rst_line.strip()
-    m = re.match('.* (.*/\..*) ', rst_line)
-    if m is not None:
-        return m.group(1)
+    m = re.match('.* (.*/.*) .*', rst_line)
+    if m:
+        result = m.group(1)
+        return result
     return ''
