@@ -1,4 +1,5 @@
 import sys
+from subprocess import check_output
 
 def get_top_activity() -> str:
     pos = 0
