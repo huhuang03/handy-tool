@@ -1,17 +1,13 @@
 import argparse
-import sys
 import os
-from tkinter import W
+import sys
 
+from . import util as util_path
 from .clean import do_clean
 from .user_scope import user_scope
-from ..util.util import ensure_is_win
 from ..util import reg
-from . import util as util_path
-
-
-def _list(arg):
-    print("\n".join(util_path.get_path_list()))
+from ..util.util import ensure_is_win
+from . import list as _list
 
 
 def remove(arg):
@@ -52,7 +48,7 @@ def main():
     clean_parser.set_defaults(func=do_clean)
 
     list_parser = subparser.add_parser('list')
-    list_parser.set_defaults(func=_list)
+    _list.init_parser(list_parser)
 
     add_parser = subparser.add_parser('add')
     add_parser.set_defaults(func=add)
