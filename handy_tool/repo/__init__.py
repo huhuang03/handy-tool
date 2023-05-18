@@ -1,13 +1,13 @@
 import argparse
-from asyncio import subprocess
-from curses import init_pair
-from sqlite3 import paramstyle
+
 from .add import add
-from .repo_list import repo_list
-from .status import status
+from .pull import pull
 from .remove import remove
 from .remove_all import remove_all
-from .pull import pull
+from .repo_list import repo_list
+from .status import status
+from .clean import clean
+
 
 def main():
     parser = argparse.ArgumentParser(description="repo util")
@@ -45,3 +45,6 @@ def init_subparser(subparser):
 
     pull_parser = repo_subparser.add_parser('pull')
     pull_parser.set_defaults(func=pull)
+
+    pull_parser = repo_subparser.add_parser('clean')
+    pull_parser.set_defaults(func=clean)

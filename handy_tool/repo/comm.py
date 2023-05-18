@@ -1,14 +1,14 @@
-import json
-
 import yaml
 
 import handy_tool.util as util
+from .typing import Repo
+from typing import List
 
 _REPO_KEY = "repos"
 
 
 # for now, use simple []?
-def get_repo_list():
+def get_repo_list() -> List[Repo]:
     # how do this?
     content = util.get_file_content(_get_config_path()).strip()
     loaded = yaml.safe_load(content)
@@ -20,7 +20,7 @@ def get_repo_list():
         return []
 
 
-def save_repo_list(repo_list):
+def save_repo_list(repo_list: List[Repo]):
     repo_str = yaml.dump({_REPO_KEY: repo_list})
     # how to save?
     config_file_path = _get_config_path()
