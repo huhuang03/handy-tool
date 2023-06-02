@@ -1,3 +1,4 @@
+from argparse import ArgumentParser
 import os
 import subprocess
 
@@ -8,20 +9,50 @@ from . import cons
 
 
 def status(args):
+    list_mode = args.list
     repo_list = comm.get_repo_list()
-    first = True
+    rst = []
     for repo in repo_list:
-        if not first:
-            print("")
-        print(f"-------- {repo}")
-
+        print(f'checking: {repo["path"]}', end='\r')
         try:
             _check_repo(repo)
         except RuntimeError as err:
-            print_red(err.args[0])
+            rst.append({'repo': repo, 'error': err.args[0]})
         else:
-            print_green("ok")
+            rst.append({'repo': repo})
+
+    if list_mode:
+        first = True
+        for item in rst:
+            if not first:
+                print("")
+            print(f"-------- {item['repo']}")
+            if item['error']:
+                print_red(item['error'])
+            else:
+                print_green("ok")
         print("")
+    else:
+        syned_repos = [item for item in rst if 'error' not in item]
+        error_repos = [item for item in rst if 'error' in item]
+        print('syned repos: ')
+        if len(syned_repos) == 0:
+            print('\tAll repo syned')
+        else:
+            for item in syned_repos:
+                print(item['repo'])
+
+        print('\nnot syned repos:')
+        if len(error_repos) == 0:
+            print('\t All repo syned')
+        else:
+            for item in error_repos:
+                print_red(f"{item['repo']}")
+
+
+def init_parser(parser: ArgumentParser):
+    parser.set_defaults(func=status)
+    parser.add_argument('-l', '--list', action='store_true')
 
 
 # I want check I have some unpushed commit
@@ -54,12 +85,14 @@ def _check_repo(local_repo):
     if 'master' in repo.refs:
         check_branch(repo, repo.refs['master'], auto_commit)
 
+
 def _check_dirty_or_uncommit_with_throw(repo):
     if repo.is_dirty():
         raise RuntimeError("is dirty!!")
 
     if _has_uncommit(repo):
-        raise RuntimeError("has uncommit files")
+        raise RuntimeError("has un-commit files")
+
 
 def _has_uncommit(repo):
     return len(repo.untracked_files) > 0

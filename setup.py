@@ -24,7 +24,7 @@ COMMANDS = [
 COMMAND_MAP = [
     ['au', "an_util"],
     ['g', 'git'],
-    ['rp', 'repo']
+    ['ro', 'repo']
 ]
 
 

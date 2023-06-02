@@ -4,8 +4,8 @@ from .add import add
 from .pull import pull
 from .remove import remove
 from .remove_all import remove_all
-from .repo_list import repo_list
-from .status import status
+from .repo_list import init_parser as repo_list_init_parser
+from .status import init_parser as repo_status_init_parser
 from .clean import clean
 
 
@@ -16,25 +16,25 @@ def main():
     args.func(args)
 
 
-def init_subparser(subparser):
+def init_subparser(parser):
     """
     Initial the subparser.
     @parm subparser the result of parser.Argparser().add_subparser()
     """
-    repo_subparser = subparser.add_subparsers()
+    repo_subparser = parser.add_subparsers()
 
     add_parser = repo_subparser.add_parser('add')
     add_parser.add_argument('--auto_commit', action="store_true")
     add_parser.set_defaults(func=add)
 
     list_parser = repo_subparser.add_parser('list')
-    list_parser.set_defaults(func=repo_list)
+    repo_list_init_parser(list_parser)
 
     status_parser = repo_subparser.add_parser('status')
-    status_parser.set_defaults(func=status)
+    repo_status_init_parser(status_parser)
 
     status_parser = repo_subparser.add_parser('st')
-    status_parser.set_defaults(func=status)
+    repo_status_init_parser(status_parser)
 
     delete_parser = repo_subparser.add_parser('remove_all')
     delete_parser.set_defaults(func=remove_all)
