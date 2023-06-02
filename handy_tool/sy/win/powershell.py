@@ -4,12 +4,13 @@ from .. import util as _util
 # set-executionpolicy RemoteSigned call this in admin mode
 _CONTENT = """
 function doJump {
-    $Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890"
+    $Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890";$Env:all_proxy="http://127.0.0.1:7890"
 }
 
 function doUnJump {
     Remove-Item Env:http_proxy
     Remove-Item Env:https_proxy
+    Remove-Item Env:all_proxy
 }
 
 New-Alias jump doJump
