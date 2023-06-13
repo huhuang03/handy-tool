@@ -38,7 +38,7 @@ def _get_scripts():
     rst.append(_create_command('personal', 'personal.personal'))
     rst.append(_create_command('vcode', 'idea.vs'))
     rst.append(_create_command('acode', 'idea.idea_android'))
-    rst.append(_create_command('scode', 'idea.scode'))
+    rst.append(_create_command('c', 'idea.smart_idea'))
     rst.append(_create_command('pcode', 'idea.idea_pycharm'))
     rst.append(_create_command('ccode', 'idea.idea_clion'))
     rst.append(_create_command('icode', 'idea.idea_intellij'))
