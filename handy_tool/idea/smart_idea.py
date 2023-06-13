@@ -11,7 +11,7 @@ from .idea_clion import IdeaClion
 
 def main():
     proj_path = '.'
-    if len(sys.argv) >= 0:
+    if len(sys.argv) >= 2:
         proj_path = os.path.abspath(sys.argv[1])
 
     if not os.path.exists(proj_path):
