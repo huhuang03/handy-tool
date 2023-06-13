@@ -18,7 +18,7 @@ def _create_command(name, file_path):
 COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm',
     'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
-    'tt', 'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
+    'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
     'sy', 'junk_file', 'jvm', 'an_util', 'cm', 'path']
 
 COMMAND_MAP = [

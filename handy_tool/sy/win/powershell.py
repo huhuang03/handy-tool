@@ -1,20 +1,10 @@
 import os.path
 from .. import util as _util
 
-# set-executionpolicy RemoteSigned call this in admin mode
-_CONTENT = """
-function doJump {
-    $Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890"
-}
+with open(os.path.join(os.path.dirname(__file__), 'asset/sy.ps1')) as f:
+    _CONTENT = f.read()
 
-function doUnJump {
-    Remove-Item Env:http_proxy
-    Remove-Item Env:https_proxy
-}
-
-New-Alias jump doJump
-New-Alias unjump doUnJump
-"""
+print(_CONTENT)
 
 
 def sy_powershell():
