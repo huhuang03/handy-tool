@@ -34,3 +34,5 @@ setopt PROMPT_SUBST
 
 # https://apple.stackexchange.com/questions/397027/how-to-change-my-command-prompt-to-show-current-working-directory
 export PROMPT='%1~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} %# '
+
+alias ec=emacsclient
