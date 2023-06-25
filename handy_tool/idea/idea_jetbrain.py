@@ -59,10 +59,20 @@ class IDeaJetBrains(IdeaBase):
             return ""
         if not self.mac_app_folder_name:
             return ""
-        folder = "/Applications"
-        for f in os.listdir(folder):
-            if self.mac_app_folder_name.lower() in f.lower() and f.endswith(".app"):
-                return os.path.join(folder, f)
+        apps_folder = "/Applications"
+
+        def find_folder(root):
+            for i in os.listdir(root):
+                if self.mac_app_folder_name.lower() in i.lower() and i.endswith(".app"):
+                    return os.path.join(root, i)
+        found = find_folder(apps_folder)
+        if found:
+            return found
+
+        tool_box_path = os.path.expanduser("~/Applications/JetBrains Toolbox")
+        found = find_folder(tool_box_path)
+        if found:
+            return found
         return ""
 
     def run(self, root):
