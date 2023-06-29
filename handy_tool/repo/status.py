@@ -48,6 +48,8 @@ def status(args):
         else:
             for item in error_repos:
                 print_red(f"{item['repo']}")
+                if item['error']:
+                    print_red(item['error'])
 
 
 def init_parser(parser: ArgumentParser):
