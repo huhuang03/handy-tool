@@ -16,7 +16,7 @@ def status(args):
         print(f'checking: {repo["path"]}', end='\r')
         try:
             _check_repo(repo)
-        except RuntimeError as err:
+        except Exception as err:
             rst.append({'repo': repo, 'error': err.args[0]})
         else:
             rst.append({'repo': repo})
