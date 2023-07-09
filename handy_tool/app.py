@@ -39,7 +39,7 @@ class App:
         elif is_mac():
             if not self.mac_path:
                 exit('mac not support for now')
-            subprocess.Popen(['open', '-a', self.mac_path, file_path], cwd=folder_path)
+            subprocess.Popen(['open', '-n', '-a', self.mac_path, file_path], cwd=folder_path)
         else:
             raise Exception(f"Not work on {platform}")
 

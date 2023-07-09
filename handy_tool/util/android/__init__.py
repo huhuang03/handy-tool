@@ -1,5 +1,7 @@
 import sys
 from subprocess import check_output
+import re
+
 
 def get_top_activity() -> str:
     pos = 0
@@ -17,14 +19,14 @@ def get_top_activity() -> str:
             print("that's only " + str(len(devices)) + " devices, and begin at 0")
         else:
             device = devices[pos]
-            device = device.split('\t')[0]
-            windows_output = check_output(['adb', 'shell', 'dumpsys activity activities | grep ResumedActivity']).decode('utf-8')
+            windows_output = check_output(
+                ['adb', 'shell', 'dumpsys activity activities | grep ResumedActivity']).decode('utf-8')
             rst_line = windows_output.splitlines()[0]
-            m = re.match('.* (.*/\..*) ', rst_line)
+            m = re.match('.* (.*/\\..*) ', rst_line)
             if m is not None:
-                print(m.group(1))
+                return m.group(1)
             else:
-                print(windows_output)
+                return windows_output
 
 
 def get_top_package() -> str:
