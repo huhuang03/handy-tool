@@ -17,3 +17,14 @@ function reloadEnv {
     $calcedPath = [System.Environment]::ExpandEnvironmentVariables($path)
     $Env:path = $calcedPath
 }
+
+function prompt {
+    $curdir = $ExecutionContext.SessionState.Path.CurrentLocation.Path.Split("\")[-1]
+
+    if($curdir.Length -eq 0) {
+        $curdir = $ExecutionContext.SessionState.Drive.Current.Name+":\"
+    }
+
+    Write-Host $curdir -NoNewline
+    "> "
+}
