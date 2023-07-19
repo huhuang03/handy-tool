@@ -19,7 +19,7 @@ COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm',
     'md5', 'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
-    'sy', 'junk_file', 'jvm', 'an_util', 'cm', 'path', 'pip1']
+    'sy', 'junk_file', 'jvm', 'an_util', 'cmake1', 'path', 'pip1']
 
 COMMAND_MAP = [
     ['au', "an_util"],
