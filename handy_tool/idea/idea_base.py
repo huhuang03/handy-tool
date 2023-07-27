@@ -1,16 +1,18 @@
 import os
 import sys
+import argparse
 
 
 class IdeaBase:
-    def run(self, file_path):
+    def run(self, args):
         raise Exception("Please impl")
 
     def main(self):
-        if len(sys.argv) < 2:
-            file_path = '.'
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-p', help='print path', action=argparse.BooleanOptionalAction)
+        parser.add_argument('path', help="project path", nargs='?')
+        args = parser.parse_args()
+        if not args.p and not args.path:
+            parser.error(f'The project path is required')
         else:
-            file_path = sys.argv[1]
-        if not os.path.exists(file_path):
-            exit('for now, I didn\'t think well how to handle directory not exist')
-        self.run(file_path)
+            self.run(args)

@@ -9,12 +9,21 @@ JET_BRAIN_FOLDER_NAME = "JetBrains"
 
 
 class IDeaJetBrains(IdeaBase):
-    def __init__(self, win_folder, win_exe_name='', mac_app_folder_name=''):
+    def __init__(self, win_folder, win_exe_name='', mac_app_folder_name='', toolbox_bin_name=''):
+        """
+        Args:
+            toolbox_bin_name toolbox可以生成script，比如它会为webstrom生成/usr/local/bin/webstorm，如果是webstorm。传入webstorm
+        """
         self.folder_name = win_folder
         self.exe_name = win_exe_name or self.folder_name
         self.mac_app_folder_name = mac_app_folder_name or win_folder
         if is_windows():
             self.jet_brain_folders = find_program(JET_BRAIN_FOLDER_NAME)
+        else:
+            self.toolbox_bin_name = toolbox_bin_name
+            if self.toolbox_bin_name:
+                self.toolbox_exe_path = f'/usr/local/bin/{toolbox_bin_name}'
+            self.has_toolbox_exe = toolbox_bin_name and os.path.exists(self.toolbox_exe_path)
 
     def _get_folder(self) -> str:
         for jet_brain_folder in self.jet_brain_folders:
@@ -75,5 +84,11 @@ class IDeaJetBrains(IdeaBase):
             return found
         return ""
 
-    def run(self, root):
-        App(self.get_exe_in_win(), self.get_exe_in_mac()).open_file(root)
+    def run(self, args):
+        win_path = self.get_exe_in_win()
+        mac_exe_path = self.toolbox_exe_path if self.has_toolbox_exe else self.get_exe_in_mac()
+        path = win_path if is_windows() else mac_exe_path
+        if args.path:
+            App(win_path, mac_exe_path).open_file(args.path)
+        else:
+            print('path is: ', path)
