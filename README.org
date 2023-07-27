@@ -1,15 +1,17 @@
-Some Utils.
-
-| executable | desc                   | win | linux |
-|------------+------------------------+-----+-------|
-| pvm        | python version manager | Y   | N     |
-
 * Install
 #+BEGIN_SRC shell
 pip install -e .
 #+END_SRC
 
-* Utils
+* commands
+
+** where1
+Only work on windows
+
+#+BEGIN_SRC shell
+ where1 qemu*
+ # show all command in path that starts with qemu
+#+END_SRC
 
 ** repo tool
 manager git repositories.
