@@ -1,5 +1,3 @@
-import os
-import sys
 import argparse
 
 
@@ -13,6 +11,5 @@ class IdeaBase:
         parser.add_argument('path', help="project path", nargs='?')
         args = parser.parse_args()
         if not args.p and not args.path:
-            parser.error(f'The project path is required')
-        else:
-            self.run(args)
+            args.path = '.'
+        self.run(args)
