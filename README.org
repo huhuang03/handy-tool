@@ -5,6 +5,9 @@ pip install -e .
 
 * commands
 
+** git1
+- `git1 view` view the remote url in browser
+
 ** where1
 Only work on windows
 

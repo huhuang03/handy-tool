@@ -1,15 +1,44 @@
 import argparse
-# what do you think the merged_rm shot
+import webbrowser
+from typing import Optional
 
-# clean_branch is too long? Can argparse tab complete?
+from git import Repo, InvalidGitRepositoryError
+
+
+def get_first_http(repo) -> Optional[str]:
+    try:
+        remote = repo.remote()
+        http_url = next(iter([url for url in remote.urls if url.startswith('http')]), None)
+        if http_url:
+            return http_url
+    except ValueError:  # remote.remote() will throw this error if no origin remote
+        pass
+    for remote in repo.remotes:
+        http_url = next(iter([url for url in remote.urls if url.startswith('http')]), None)
+        if http_url:
+            return http_url
+    return None
+
+
+def view_repo_in_browser():
+    try:
+        repo = Repo('.')
+    except InvalidGitRepositoryError:
+        print('is not git repo')
+        return
+    http_url = get_first_http(repo)
+    if not http_url:
+        print('has no http url')
+        return
+    webbrowser.open(http_url)
 
 
 def main():
     parser = argparse.ArgumentParser(description="git util")
     subparsers = parser.add_subparsers(dest='sub_command')
 
-    # do some boring thing
-    subparsers.add_parser('del_merged', help='delete merged branch')
-    # subparsers.add_parser('c', help='clean the cmake cache files.')
+    subparsers.add_parser('view', help='view repo in browser')
 
     args = parser.parse_args()
+    if args.sub_command == 'view':
+        view_repo_in_browser()

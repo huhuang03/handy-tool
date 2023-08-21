@@ -23,7 +23,7 @@ COMMANDS = [
 
 COMMAND_MAP = [
     ['au', "an_util"],
-    ['g', 'git'],
+    ['git1', 'git'],
     ['ro', 'repo']
 ]
 
