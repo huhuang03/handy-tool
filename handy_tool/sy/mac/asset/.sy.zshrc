@@ -36,3 +36,4 @@ setopt PROMPT_SUBST
 export PROMPT='%1~ ${COLOR_GIT}$(parse_git_branch)${COLOR_DEF} %# '
 
 alias ec=emacsclient
+alias xcode="open -a /Applications/Xcode.app"
