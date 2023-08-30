@@ -36,22 +36,26 @@ class IdeaAndroid(IdeaBase):
         IdeaBase.__init__(self)
         self.prefer_canary = prefer_canary
 
-    def run(self, root):
+    def run(self, project_root):
+        if not os.path.exists(project_root):
+            print(f'project not exists: ${os.path.abspath(project_root)}')
+            pass
         mac_path = "/Applications/Android Studio.app"
         if is_mac():
             if self.prefer_canary:
                 canary_path = "/Applications/Android Studio Canary.app"
                 if os.path.exists(canary_path):
                     mac_path = canary_path
-        App(_get_android_home(self.prefer_canary), mac_path).start('.')
+        App(_get_android_home(self.prefer_canary), mac_path).start(project_root)
 
 
 def main():
     parser = argparse.ArgumentParser(prog='acode', description="quick open with android studio")
     parser.add_argument('-c', '--canary', action='store_true',
                         help='prefer open with canary')
+    parser.add_argument('path', nargs="?", default=".")
     args = parser.parse_args()
-    IdeaAndroid(args.canary).run('')
+    IdeaAndroid(args.canary).run(args.path)
 
 
 if __name__ == '__main__':
