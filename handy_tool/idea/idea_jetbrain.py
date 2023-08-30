@@ -12,7 +12,7 @@ class IDeaJetBrains(IdeaBase):
     def __init__(self, win_folder, win_exe_name='', mac_app_folder_name='', toolbox_bin_name=''):
         """
         Args:
-            toolbox_bin_name toolbox可以生成script，比如它会为webstrom生成/usr/local/bin/webstorm，如果是webstorm。传入webstorm
+            toolbox_bin_name toolbox可以生成script，比如它会为webstorm生成/usr/local/bin/webstorm，如果是webstorm。传入webstorm
         """
         self.folder_name = win_folder
         self.exe_name = win_exe_name or self.folder_name

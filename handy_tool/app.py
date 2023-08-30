@@ -9,9 +9,10 @@ class App:
     """
     Represent an application
     """
-    def __init__(self, win_path='', mac_path=''):
+    def __init__(self, win_path='', mac_path='', support_mac=False):
         self.win_path = win_path
         self.mac_app_path = mac_path
+        self.support_mac = support_mac or self.mac_app_path
 
     def open_file(self, file_path):
         full_file_path = os.path.abspath(file_path)
@@ -37,8 +38,10 @@ class App:
                 print(f"win_path: {self.win_path}")
                 raise e
         elif is_mac():
-            if not self.mac_app_path:
+            if not self.support_mac:
                 exit('mac not support for now')
+            if not self.mac_app_path:
+                exit("can't find app path")
             list_command = ['open', '-na', self.mac_app_path, '--args', full_file_path]
             subprocess.Popen(list_command, cwd=folder_path)
         else:

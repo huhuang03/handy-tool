@@ -16,7 +16,7 @@ def _create_command(name, file_path):
 
 
 COMMANDS = [
-    'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm',
+    'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm', 'gh1',
     'md5', 'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'file',
     "where1", 'sy', 'junk_file', 'jvm', 'an_util', 'cmake1', 'path', 'pip1']
@@ -42,6 +42,7 @@ def _get_scripts():
     rst.append(_create_command('pcode', 'idea.idea_pycharm'))
     rst.append(_create_command('fcode', 'idea.idea_fleet'))
     rst.append(_create_command('ccode', 'idea.idea_clion'))
+    rst.append(_create_command('gcode', 'idea.idea_go_land'))
     rst.append(_create_command('icode', 'idea.idea_intellij'))
     rst.append(_create_command('wcode', 'idea.idea_webstorm'))
     rst.append(_create_command('hcode', 'idea.idea_phpstorm'))
