@@ -14,6 +14,7 @@ class IDeaJetBrains(IdeaBase):
         Args:
             toolbox_bin_name toolbox可以生成script，比如它会为webstorm生成/usr/local/bin/webstorm，如果是webstorm。传入webstorm
         """
+        self.has_toolbox_exe = False
         self.folder_name = win_folder
         self.exe_name = win_exe_name or self.folder_name
         self.mac_app_folder_name = mac_app_folder_name or win_folder
