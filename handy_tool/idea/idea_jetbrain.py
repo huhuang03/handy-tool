@@ -8,6 +8,22 @@ from ..util.util_os import is_mac, is_windows
 JET_BRAIN_FOLDER_NAME = "JetBrains"
 
 
+def walk_reverse(root):
+    """
+    :return: like os.walk, but order folder desc, because  we want find bigger versin first.
+    """
+    if not os.path.exists(root):
+        raise FileNotFoundError(root)
+    if os.path.isfile(root):
+        return
+    all_files_and_folder = os.listdir(root)
+    all_files = [f for f in all_files_and_folder if os.path.isfile(os.path.join(root, f)) ]
+    all_folders = [f for f in all_files_and_folder if os.path.isdir(os.path.join(root, f)) ]
+    yield root, list(reversed(all_folders)), all_files
+    for folder in reversed(all_folders):
+        yield from walk_reverse(os.path.join(root, folder))
+
+
 class IDeaJetBrains(IdeaBase):
     def __init__(self, win_folder, win_exe_name='', mac_app_folder_name='', toolbox_bin_name=''):
         """
@@ -35,11 +51,13 @@ class IDeaJetBrains(IdeaBase):
 
     def _check_user_local_path(self) -> Optional[str]:
         root_path = os.path.expanduser("~/AppData/Local/JetBrains/Toolbox/apps")
+        # 按照version倒序比较好
         if os.path.exists(root_path):
             sub_folders = os.listdir(root_path)
             for p in sub_folders:
                 if self.folder_name.lower() == p.lower():
-                    for root, dirs, files in os.walk(os.path.join(root_path, p)):
+                    # 这里我想倒叙
+                    for root, dirs, files in walk_reverse(os.path.join(root_path, p)):
                         if 'bin' in dirs:
                             # find dir
                             bin_folder = os.path.join(root, 'bin')
