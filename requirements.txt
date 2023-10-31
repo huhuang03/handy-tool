@@ -1,7 +1,11 @@
-inquirer==3.1.3
+inquirer~=2.8.0
 psutil==5.9.5
-PyYAML==6.0.1
-requests==2.31.0
+PyYAML~=5.4.1
+requests~=2.25.1
 pyperclip~=1.8.2
 setuptools==68.2.2
 GitPython~=3.1.27
+
+comm~=0.1.3
+opencv-python~=4.8.1.78
+numpy
