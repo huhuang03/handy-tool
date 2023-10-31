@@ -3,6 +3,16 @@
 pip install -e .
 #+END_SRC
 
+* utils
+| util           | desc                                 |
+|----------------+--------------------------------------|
+| img            | gen random img                       |
+| git1           | git utils                            |
+| cm             | cmake utils                          |
+| ip             | get output ip                        |
+| gettopactivity | get android device top activity name |
+| cmake_ex       | remove the cmake cache files         |
+
 * commands
 
 ** git1
@@ -41,6 +51,9 @@ cmake tool.
 mkdir build32
 # build and install in build32
 #+END_SRC
+
+** img
+generate a random img
 
 ** jvm
 | jvm list | list all searched jdk | |
@@ -96,11 +109,5 @@ get ride of this.
 | ip             | get output ip                           |
 | gettopactivity | get android device top activity name |
 | cmake_ex       | remove the cmake cache files            |
-| jt_ex          | crawl the jetbrain active code           |
-
-
-* TODOS
-How to let the jt_code use for private.
-
 
 * Sync? need be access private repo.
