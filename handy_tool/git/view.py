@@ -1,3 +1,4 @@
+import re
 import webbrowser
 from typing import Optional
 
@@ -18,15 +19,19 @@ def view_repo_in_browser():
 
 
 def get_first_http(repo) -> Optional[str]:
-    try:
-        remote = repo.remote()
-        http_url = next(iter([url for url in remote.urls if url.startswith('http')]), None)
-        if http_url:
-            return http_url
-    except ValueError:  # remote.remote() will throw this error if no origin remote
-        pass
+    def _parse(url: str) -> str:
+        if url.startswith('http') or url.startswith('https'):
+            return url
+        if url.startswith('git@github'):
+            pattern = re.compile(r'git@github\.com:(.*?)(\.git)?$')
+            match = pattern.match(url)
+            if match:
+                https_url = f'https://github.com/{match.group(1)}'
+                return https_url
+            else:
+                return ''
     for remote in repo.remotes:
-        http_url = next(iter([url for url in remote.urls if url.startswith('http')]), None)
+        http_url = next(iter([_parse(url) for url in remote.urls]), None)
         if http_url:
             return http_url
     return None
