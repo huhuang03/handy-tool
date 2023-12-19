@@ -1,4 +1,3 @@
-from handy_tool.jt_code import main
 from ..util.util import is_windows, is_mac
 from .personal_win import setup_win
 

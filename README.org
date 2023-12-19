@@ -13,6 +13,12 @@ pip install -e .
 | gettopactivity | get android device top activity name |
 | cmake_ex       | remove the cmake cache files         |
 
+** like vscode's code
+| ccode | open project in clion |
+| acode | in android studio     |
+| pcode | in pycharm            |
+| icode | open intellij |
+
 * commands
 
 ** git1
@@ -63,11 +69,6 @@ generate a random img
 | wifi | turn on adb-via-wifi on connected usb device(only test only one device connected).|
 | push_cart | push cert to device as system certification(need root) |
 
-** like vscode's code
-| ccode | open project in clion |
-| acode | in android studio     |
-| pcode | in pycharm            |
-| icode | open intellij |
 
 
 ** gitup
@@ -104,11 +105,6 @@ junk_file 10G9M
 *** permission define
 When create in driver ~C:~, there's a permission deny issue. You can run in a ~Run as amin~ powershell to
 get ride of this.
-
-** others
-| ip             | get output ip                           |
-| gettopactivity | get android device top activity name |
-| cmake_ex       | remove the cmake cache files            |
 
 * Sync? need be access private repo.
 

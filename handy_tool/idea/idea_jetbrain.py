@@ -36,6 +36,9 @@ class IDeaJetBrains(IdeaBase):
         self.mac_app_folder_name = mac_app_folder_name or win_folder
         if is_windows():
             self.jet_brain_folders = find_program(JET_BRAIN_FOLDER_NAME)
+            toolbox_app_folder = os.path.expanduser('~/AppData/Local/JetBrains/Toolbox/apps')
+            if os.path.exists(toolbox_app_folder):
+                self.jet_brain_folders.append(toolbox_app_folder)
         else:
             self.toolbox_bin_name = toolbox_bin_name
             if self.toolbox_bin_name:
