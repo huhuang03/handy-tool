@@ -17,14 +17,16 @@ def _create_command(name, file_path):
 
 COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm', 'gh1',
-    'md5', 'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
-    'rn_ex', 'json2bean', 'jt_code', 'remote', 'file', 'img',
+    'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
+    'rn_ex', 'json2bean', 'jt_code', 'remote', 'img',
     "where1", 'sy', 'junk_file', 'jvm', 'an_util', 'cmake1', 'path', 'pip1']
 
 COMMAND_MAP = [
     ['au', "an_util"],
+    ['md51', 'md5'],
     ['git1', 'git'],
-    ['ro', 'repo']
+    ['ro', 'repo'],
+    ['file1', 'file']
 ]
 
 

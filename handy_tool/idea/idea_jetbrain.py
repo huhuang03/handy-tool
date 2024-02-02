@@ -1,3 +1,4 @@
+import argparse
 from typing import Optional
 import os
 from .idea_base import IdeaBase
@@ -105,6 +106,9 @@ class IDeaJetBrains(IdeaBase):
         if found:
             return found
         return ""
+
+    def _setup_parser(self, parser: argparse.ArgumentParser):
+        parser.add_argument('-c', help='prepare use community edition', action=argparse.BooleanOptionalAction)
 
     def run(self, args):
         win_path = self.get_exe_in_win()
