@@ -17,6 +17,7 @@ def _create_command(name, file_path):
 
 COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm', 'gh1',
+    'clean_space',
     'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'img',
     "where1", 'sy', 'junk_file', 'jvm', 'an_util', 'cmake1', 'path', 'pip1']

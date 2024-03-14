@@ -12,12 +12,13 @@ pip install -e .
 | ip             | get output ip                        |
 | gettopactivity | get android device top activity name |
 | cmake_ex       | remove the cmake cache files         |
+| clean_space    | remove unused cache space etc        |
 
 ** like vscode's code
 | ccode | open project in clion |
 | acode | in android studio     |
 | pcode | in pycharm            |
-| icode | open intellij |
+| icode | open intellij         |
 
 * commands
 
