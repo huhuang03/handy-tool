@@ -30,10 +30,12 @@ def clean_space():
         return
     # find folder compression-webpack-plugin and delete
     # need check compression-webpack-plugin in a node package.
+    # something is wrong!!
     subfolders = glob.glob(os.path.join(root_path.resolve().__str__(), '**', 'compression-webpack-plugin'), recursive=True)
     for item in subfolders:
+        print(f'find item: {item}')
         if _check_compression_webpack_plugin(Path(item)):
-            print(f'begin remove: {item}')
+            print(f'removing: {item}')
             shutil.rmtree(item)
 
 
