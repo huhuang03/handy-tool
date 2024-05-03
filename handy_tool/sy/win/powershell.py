@@ -4,8 +4,6 @@ from .. import util as _util
 with open(os.path.join(os.path.dirname(__file__), 'asset/sy.ps1')) as f:
     _CONTENT = f.read()
 
-print(_CONTENT)
-
 
 def sy_powershell():
     """@:param root the source files root"""
