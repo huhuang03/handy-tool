@@ -1,4 +1,5 @@
 from handy_tool import util
+from handy_tool.util.util_powershell import reload_env_by_powershell
 import inquirer
 import os
 from .. import env
@@ -47,11 +48,8 @@ class JVM:
                           message='Which path you want use',
                           choices=self._paths)
         ])
-        print(f"choice: {choice}, java_home: {choice['path']}")
         if choice:
-            env.insert_front_in_path_temporary("")
             env.set_in_user('JAVA_HOME', choice['path'])
-            # but how to let the path active immediately
             print('done')
         else:
             print("not choice")

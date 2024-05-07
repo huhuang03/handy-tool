@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from .jvm import JVM
+from .jenv import JVM
 
 
 def main():

@@ -1,5 +1,5 @@
 * Commands
-** `jvm use` choice the path.
+** `jenv use` choice the path.
 
-** `jvm clean` not impl
+** `jenv clean` not impl
 remove the hard coded java path, and create an JAVA_HOME

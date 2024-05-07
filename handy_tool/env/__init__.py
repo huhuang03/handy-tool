@@ -16,8 +16,5 @@ def insert_front_in_path_temporary(sub_path):
 
 def set_in_user(key: str, value: str):
     """set in user scope"""
-    # looks not work.
-    # strange not work.
-    # print(f'command: {" ".join(command)}')
-    command = ['powershell', '-Command', f'[Environment]::SetEnvironmentVariable("{key}", "{value}", "User")']
+    command = ['powershell', '-NoProfile', '-Command', f'[Environment]::SetEnvironmentVariable("{key}", "{value}", "User")']
     subprocess.run(command)

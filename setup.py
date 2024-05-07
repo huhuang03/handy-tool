@@ -20,7 +20,11 @@ COMMANDS = [
     'clean_space', 'du1', 'apktool1',
     'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'img',
-    "where1", 'sy', 'junk_file', 'jvm', 'an_util', 'cmake1', 'path', 'pip1']
+    "where1", 'sy', 'junk_file', 'an_util', 'cmake1', 'path', 'pip1']
+
+# 'jvm',
+if is_windows():
+    COMMANDS += ['jenv']
 
 COMMAND_MAP = [
     ['au', "an_util"],
