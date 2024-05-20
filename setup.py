@@ -17,7 +17,7 @@ def _create_command(name, file_path):
 
 COMMANDS = [
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm', 'gh1',
-    'clean_space', 'du1', 'apktool1', 'vcpkg1',
+    'clean_space', 'du1', 'apktool1',
     'lg', 'utf8_2_utf8bom', 'save_space', 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'img',
     "where1", 'sy', 'junk_file', 'an_util', 'cmake1', 'path', 'pip1']
@@ -50,6 +50,7 @@ def _get_scripts():
     rst.append(_create_command('pcode', 'idea.idea_pycharm'))
     rst.append(_create_command('fcode', 'idea.idea_fleet'))
     rst.append(_create_command('ccode', 'idea.idea_clion'))
+    rst.append(_create_command('vcpkg1', 'vcpkg1.vcpkg1'))
     rst.append(_create_command('cncode', 'idea.idea_clion_nova'))
     rst.append(_create_command('gcode', 'idea.idea_go_land'))
     rst.append(_create_command('icode', 'idea.idea_intellij'))
