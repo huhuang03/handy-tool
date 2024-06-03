@@ -1,5 +1,6 @@
 import argparse
 from typing import Optional
+from pathlib import Path
 import os
 from .idea_base import IdeaBase
 from ..util.util_find_program import find_program
@@ -37,9 +38,9 @@ class IDeaJetBrains(IdeaBase):
         self.mac_app_folder_name = mac_app_folder_name or win_folder
         if is_windows():
             self.jet_brain_folders = find_program(JET_BRAIN_FOLDER_NAME)
-            toolbox_app_folder = os.path.expanduser('~/AppData/Local/JetBrains/Toolbox/apps')
+            toolbox_app_folder = Path('~/AppData/Local/JetBrains/Toolbox/apps').expanduser()
             if os.path.exists(toolbox_app_folder):
-                self.jet_brain_folders.append(toolbox_app_folder)
+                self.jet_brain_folders.append(toolbox_app_folder.resolve().__str__())
             if os.path.exists(os.path.expanduser('~/AppData/Local/Programs')):
                 self.jet_brain_folders.append(os.path.expanduser('~/AppData/Local/Programs'))
         else:
@@ -53,7 +54,11 @@ class IDeaJetBrains(IdeaBase):
             for fo in os.listdir(jet_brain_folder):
                 if self.folder_name in fo.lower():
                     return os.path.join(jet_brain_folder, fo)
-        exit('can\'t find folder for order: {}'.format(self.folder_name))
+        # 现在已经是直接安装了
+        find_in_programs = find_program(self.folder_name)
+        if find_in_programs:
+            return find_in_programs[0]
+        exit('can\'t find folder for order: {} in folders: {}'.format(self.folder_name, self.jet_brain_folders))
 
     def _check_user_local_path(self) -> Optional[str]:
         root_path = os.path.expanduser("~/AppData/Local/JetBrains/Toolbox/apps")
