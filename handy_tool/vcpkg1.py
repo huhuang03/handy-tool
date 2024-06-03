@@ -19,11 +19,32 @@ _content = '''
 }
 '''
 
+_cmake_preset_content = '''
+{
+  "version": 3,
+  "configurePresets": [
+    {
+      "name": "default",
+      "binaryDir": "${sourceDir}/build",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake",
+        "CMAKE_INSTALL_PREFIX": "D:/Program Files"
+      }
+    }
+  ]
+}
+'''
+
+
+def preset():
+    pass
+
 
 def main():
-    preset_file = _cur_folder / 'vcpkg-configuration.json'
-    if preset_file.exists():
-        print('vcpkg-configuration.json already exists')
+    # vcpkg-configuration.json
+    file_name = 'CMakePresets.json'
+    dst_file = _cur_folder / file_name
+    if dst_file.exists():
+        print(f'{file_name} already exists')
         return
-    preset_file.write_text(_content, encoding='utf-8')
-    print('done!')
+    dst_file.write_text(_cmake_preset_content, encoding='utf-8')
