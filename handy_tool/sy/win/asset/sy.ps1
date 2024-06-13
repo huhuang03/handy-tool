@@ -8,6 +8,12 @@ function doUnJump {
     Remove-Item Env:all_proxy
 }
 
+if (Test-Path Alias:\jump) {
+    Remove-Item -Path Alias:\jump
+}
+if (Test-Path Alias:\unjump) {
+    Remove-Item -Path Alias:\unjump
+}
 New-Alias jump doJump
 New-Alias unjump doUnJump
 
@@ -60,21 +66,20 @@ function du1 {
 
 
 function prompt {
-#    $host.UI.RawUI.WindowTitle = $ExecutionContext.SessionState.Path.CurrentLocation.Path
-#    $branch = & git rev-parse --abbrev-ref HEAD 2>$null
-#    if ($branch) {
-#        $branchInfo = " ($branch)"
-#    } else {
-#        $branchInfo = ""
-#    }
-#    "PS $($executionContext.SessionState.Path.CurrentLocation)$branchInfo> "
+   $host.UI.RawUI.WindowTitle = $ExecutonContext.SessionState.Path.CurrentLocation.Path
+   $branch = & git rev-parse --abbrev-ref HEAD 2>$null
+   if ($branch) {
+       $branchInfo = " ($branch)"
+   } else {
+       $branchInfo = ""
+   }
 
 #    https://learn.microsoft.com/en-us/windows/terminal/tutorials/new-tab-same-directory
-    $loc = $executionContext.SessionState.Path.CurrentLocation;
+    $loc = $executionContext.SessionState.Path.CurrentLocation.Path;
     $out = ""
     if ($loc.Provider.Name -eq "FileSystem") {
         $out += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
     }
-    $out += "PS $loc$('>' * ($nestedPromptLevel + 1)) ";
+    $out += "PS $loc$branchInfo$('>' * ($nestedPromptLevel + 1)) "
     return $out
 }
