@@ -80,6 +80,6 @@ function prompt {
   if ($loc.Provider.Name -eq "FileSystem") {
     $out += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
   }
-  $out += "PS $loc$branchInfo$('>' * ($nestedPromptLevel + 1)) ";
+  $out += "PS $($loc.Path)$branchInfo$('>' * ($nestedPromptLevel + 1)) ";
   return $out
 }
