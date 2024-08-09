@@ -1,13 +1,23 @@
 import re
 import webbrowser
 from typing import Optional
+import argparse
 
 from git import Repo, InvalidGitRepositoryError
 
+sub_command = 'view'
 
-def view_repo_in_browser():
+def init_sub_command(sub_parser: argparse.ArgumentParser):
+    sub_parser.add_argument('path', nargs="?", default=".")
+    sub_parser.add_argument('-p', action=argparse.BooleanOptionalAction)
+
+def exec(args):
+    view_repo_in_browser(args)
+
+def view_repo_in_browser(args):
+    path = args.path
     try:
-        repo = Repo('.')
+        repo = Repo(path)
     except InvalidGitRepositoryError:
         print('is not git repo')
         return
@@ -15,7 +25,25 @@ def view_repo_in_browser():
     if not http_url:
         print('has no http url')
         return
+
+    if args.p:
+        if _is_gitlab(http_url):
+            http_url =  http_url + '/pulls'
+        else:
+            http_url = _remove_last_git(http_url) + '/pipelines'
     webbrowser.open(http_url)
+
+
+def _remove_last_git(str):
+    if str.endswith('.git'):
+        return str[:-len('.git')]
+    return str
+
+def _is_github(url):
+    return 'github' in url
+
+def _is_gitlab(path):
+    return 'git' in path.split('/')
 
 
 def get_first_http(repo) -> Optional[str]:
