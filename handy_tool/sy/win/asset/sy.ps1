@@ -83,3 +83,11 @@ function prompt {
   $out += "PS $($loc.Path)$branchInfo$('>' * ($nestedPromptLevel + 1)) ";
   return $out
 }
+
+# functions
+function find1 {
+    param (
+        [string]$pattern
+    )
+    Get-ChildItem -Recurse -Filter $pattern | Select-Object -ExpandProperty FullName
+}
