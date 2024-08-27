@@ -10,6 +10,7 @@ sub_command = 'view'
 def init_sub_command(sub_parser: argparse.ArgumentParser):
     sub_parser.add_argument('path', nargs="?", default=".")
     sub_parser.add_argument('-p', action=argparse.BooleanOptionalAction)
+    sub_parser.add_argument('-m', action=argparse.BooleanOptionalAction)
 
 def exec(args):
     view_repo_in_browser(args)
@@ -31,6 +32,11 @@ def view_repo_in_browser(args):
             http_url =  http_url + '/pulls'
         else:
             http_url = _remove_last_git(http_url) + '/pipelines'
+    if args.m:
+        if _is_gitlab(http_url):
+            http_url =  http_url + '/pulls'
+        else:
+            http_url = _remove_last_git(http_url) + '/merge_requests'
     webbrowser.open(http_url)
 
 
