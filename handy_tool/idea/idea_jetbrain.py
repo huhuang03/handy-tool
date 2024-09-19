@@ -52,7 +52,7 @@ class IDeaJetBrains(IdeaBase):
     def _get_folder(self) -> str:
         for jet_brain_folder in self.jet_brain_folders:
             for fo in os.listdir(jet_brain_folder):
-                if self.folder_name in fo.lower():
+                if self.folder_name.lower() in fo.lower():
                     return os.path.join(jet_brain_folder, fo)
         # 现在已经是直接安装了
         find_in_programs = find_program(self.folder_name)
