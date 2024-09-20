@@ -1,0 +1,4 @@
+[[intellijs]]
+command = 'icode'
+win_folder = 'intellij'
+exe_name = 'idea64'
