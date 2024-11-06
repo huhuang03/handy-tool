@@ -46,6 +46,13 @@ def main():
     subparser.add_parser("wifi", help="connect adb var wifi")
     subparser.add_parser("ls", help="list all packages.")
 
+    parser_md5 = subparser.add_parser("md5", help="get md5 from sign file")
+    parser_md5.add_argument("path", help="sign file path")
+    parser_md5.add_argument("pwd", help="pwd")
+    parser_md5.add_argument("alias", help="the alias")
+
+    parser_public_key = subparser.add_parser("public_key", help="get public key from sign file")
+
     args = parser.parse_args()
     # do you want a map??
     if args.command == "screenshot":
@@ -60,6 +67,14 @@ def main():
         push_cert(args)
     elif args.command == "ls":
         ls()
+    elif args.command == "md5":
+        md5(args)
+    elif args.command == "public_key":
+        public_key()
+
+
+def md5(args):
+    # pass
 
 
 def ls():
