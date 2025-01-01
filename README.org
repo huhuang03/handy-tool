@@ -3,7 +3,7 @@
 pip install -e .
 #+END_SRC
 
-* utils
+* TOC
 | util           | desc                                 |
 |----------------+--------------------------------------|
 | img            | gen random img                       |
@@ -13,12 +13,13 @@ pip install -e .
 | gettopactivity | get android device top activity name |
 | cmake_ex       | remove the cmake cache files         |
 | clean_space    | remove unused cache space etc        |
-
-** like vscode's code
-| ccode | open project in clion |
-| acode | in android studio     |
-| pcode | in pycharm            |
-| icode | open intellij         |
+| ccode          | open project in clion                |
+| acode          | in android studio                    |
+| pcode          | in pycharm                           |
+| icode          | open intellij                        |
+| where1         | seach commands                       |
+| junk_file      | create space holderfile              |
+| sync_link      | link all file in folder1 to folder2  |
 
 * commands
 
@@ -110,3 +111,18 @@ get ride of this.
 * Sync? need be access private repo.
 
 
+[{"applicationsNumber":"0","item":"发明专利","obtainedNumber":"0"},
+{"applicationsNumber":"0","item":"实用新型专利","obtainedNumber":"0"},
+{"applicationsNumber":"0","item":"外观设计专利","obtainedNumber":"0"},
+{"applicationsNumber":"0","item":"软件著作权","obtainedNumber":"0"},{"applicationsNumber":"0","item":"其他","obtainedNumber":"0"},{"applicationsNumber":"0","item":"合计","obtainedNumber":"0"}]
+
+
+        /**
+         * 申请数
+         */
+        private String applicationsNumber;
+
+        /**
+         * 获得数
+         */
+        private String obtainedNumber;

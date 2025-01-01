@@ -1,6 +1,9 @@
 import argparse
 import os
+import subprocess
+import tempfile
 import time
+import re
 
 from .get_apk import get_apk
 from .wifi import wifi
@@ -29,6 +32,10 @@ def screenshot():
     print("Done!")
 
 
+MD5_COMMAND_PATH = "path"
+MD5_COMMAND_PWD = "pwd"
+MD5_COMMAND_ALIAS = "alias"
+
 def main():
     parser = argparse.ArgumentParser(description="android utils")
 
@@ -46,6 +53,11 @@ def main():
     subparser.add_parser("wifi", help="connect adb var wifi")
     subparser.add_parser("ls", help="list all packages.")
 
+    parser_sign_info = subparser.add_parser("sign_info", help="get sign info from sign file")
+    parser_sign_info.add_argument("path", help="sign file path")
+    parser_sign_info.add_argument("pwd", help="pwd")
+    parser_sign_info.add_argument("alias", help="the alias")
+
     args = parser.parse_args()
     # do you want a map??
     if args.command == "screenshot":
@@ -60,6 +72,40 @@ def main():
         push_cert(args)
     elif args.command == "ls":
         ls()
+    elif args.command == "sign_info":
+        sign_info(args)
+    elif args.command == "public_key":
+        public_key()
+
+
+def sign_info(args):
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        cert_full_path = os.path.join(tmp_dir, 'tmp.cert')
+    # keytool -export -keystore keystore -storepass <your-keystore-password> -alias <your-alias> -file <certificate-file>.cer
+        command_gen_cert = ['keytool', '-export','-keystore', args.path, '-storepass', args.pwd, '-alias', args.alias, '-file', cert_full_path]
+        rst = subprocess.run(command_gen_cert, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        assert rst.returncode == 0
+        command_get_md5 = ['openssl', 'x509', '-in', cert_full_path, '-noout', '-fingerprint', '-md5']
+        rst = subprocess.run(command_get_md5, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        assert rst.returncode == 0
+
+        output = rst.stdout
+        match = re.search(r'Fingerprint=([A-F0-9:]+)', output)
+        if match:
+            md5_fingerprint = match.group(1)
+            print("md5 finterprint:", md5_fingerprint.replace(":", ""))
+        else:
+            exit(1)
+
+        command_get_public_key = ['openssl', 'x509', '-in', cert_full_path, '-pubkey', '-noout']
+        rst = subprocess.run(command_get_public_key, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+
+        match = re.search(r'-----BEGIN PUBLIC KEY-----\n([A-Za-z0-9+/=\n]+)\n-----END PUBLIC KEY-----', rst.stdout)
+        if match:
+            public_key = match.group(1)
+            print("pubic key: ", public_key.replace("\n", ""))
+        else:
+            exit(1)
 
 
 def ls():
