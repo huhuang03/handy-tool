@@ -1,3 +1,20 @@
+Remove-Item Alias:cd -Force
+
+function cd {
+    param (
+        [string]$Path
+    )
+
+    # 如果没有指定路径，判断当前驱动器
+    if (-not $Path) {
+        $currentDrive = (Get-Location).Drive.Name
+        Set-Location -Path "${currentDrive}:\"
+    } else {
+        # 否则按正常路径处理
+        Set-Location -Path $Path
+    }
+}
+
 function doJump {
     $Env:http_proxy="http://127.0.0.1:7890";$Env:https_proxy="http://127.0.0.1:7890";$Env:all_proxy="http://127.0.0.1:7890"
 }
@@ -90,4 +107,8 @@ function find1 {
         [string]$pattern
     )
     Get-ChildItem -Recurse -Filter $pattern | Select-Object -ExpandProperty FullName
+}
+
+function hello {
+    echo "Hello sync"
 }

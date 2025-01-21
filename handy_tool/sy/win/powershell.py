@@ -1,11 +1,11 @@
 import os.path
 from .. import util as _util
 
-with open(os.path.join(os.path.dirname(__file__), 'asset/sy.ps1')) as f:
+with open(os.path.join(os.path.dirname(__file__), 'asset/sy.ps1'), encoding='utf-8') as f:
     _CONTENT = f.read()
 
 
-def sy_powershell():
+def sync_powershell():
     """@:param root the source files root"""
     profile_path = os.path.expanduser("~\\Documents\\PowerShell\\Microsoft.PowerShell_profile.ps1")
 
@@ -18,7 +18,7 @@ def sy_powershell():
     if not os.path.exists(root):
         os.makedirs(root)
 
-    with open(sy_path, 'w') as f:
+    with open(sy_path, 'w', encoding='utf-8') as f:
         f.write(_CONTENT)
 
     source = '. "$PSScriptROOT\\.sy\\sy.ps1"'
