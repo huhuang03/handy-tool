@@ -9,13 +9,8 @@ def try_baidu():
 
 def try_ip_api():
     data = os.popen('curl http://ip-api.com/json/').read()
+    print(data)
 
 
 def main():
     try_ip_api()
-    # data = os.popen('curl http://ip-api.com/json/').read()
-    # if data == "":
-    #     print("get no ip address")
-    # else:
-    #     data_json = json.loads(data)
-    #     print(f'ip:{data_json["query"]}\ncountry: {data_json["country_name"]}')
