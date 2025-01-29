@@ -86,6 +86,14 @@ function du1
 
 function prompt
 {
+    # can get branch
+    $branch = & git rev-parse --abbrev-ref HEAD 2>$null
+    if ($branch) {
+        $branchInfo = " ($branch)"
+    } else {
+        $branchInfo = ""
+    }
+
     $loc = $executionContext.SessionState.Path.CurrentLocation;
 
     $out = ""
@@ -93,7 +101,7 @@ function prompt
     {
         $out += "$( [char]27 )]9;9;`"$( $loc.ProviderPath )`"$( [char]27 )\"
     }
-    $out += "PS $loc$( '>' * ($nestedPromptLevel + 1) ) ";
+    $out += "PS $loc$branchInfo$( '>' * ($nestedPromptLevel + 1) ) ";
     return $out
 }
 
