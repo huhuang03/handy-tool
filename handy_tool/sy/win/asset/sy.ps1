@@ -101,41 +101,10 @@ function prompt
     {
         $out += "$( [char]27 )]9;9;`"$( $loc.ProviderPath )`"$( [char]27 )\"
     }
-    $out += "PS $loc$branchInfo$( '>' * ($nestedPromptLevel + 1) ) ";
+    $out += "$loc$branchInfo$( '>' * ($nestedPromptLevel + 1) ) ";
     return $out
 }
 
-#function prompt {
-#    $curdir = $ExecutionContext.SessionState.Path.CurrentLocation.Path.Split("\")[-1]
-#
-#    if($curdir.Length -eq 0) {
-#        $curdir = $ExecutionContext.SessionState.Drive.Current.Name+":\"
-#    }
-#
-#    Write-Host $curdir -NoNewline
-#    "> "
-#}
-#
-#
-#function prompt {
-#   $host.UI.RawUI.WindowTitle = $ExecutonContext.SessionState.Path.CurrentLocation.Path
-#   $branch = & git rev-parse --abbrev-ref HEAD 2>$null
-#   if ($branch) {
-#       $branchInfo = " ($branch)"
-#   } else {
-#       $branchInfo = ""
-#   }
-#
-#  $loc = $executionContext.SessionState.Path.CurrentLocation;
-#
-#  $out = ""
-#  if ($loc.Provider.Name -eq "FileSystem") {
-#    $out += "$([char]27)]9;9;`"$($loc.ProviderPath)`"$([char]27)\"
-#  }
-#  $out += "PS $($loc.Path)$branchInfo$('>' * ($nestedPromptLevel + 1)) ";
-#  return $out
-#}
-#
 # functions
 function find1
 {
