@@ -45,6 +45,7 @@ def _get_scripts():
     rst.append(_create_command('personal', 'personal.personal'))
     rst.append(_create_command('vcode', 'idea.vs'))
     rst.append(_create_command('acode', 'idea.idea_android'))
+    rst.append(_create_command('dcode', 'idea.idea_data_grip'))
     # # c is easy mistake click
     # rst.append(_create_command('s', 'idea.smart_idea'))
     rst.append(_create_command('pcode', 'idea.idea_pycharm'))
