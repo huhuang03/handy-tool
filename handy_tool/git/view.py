@@ -7,13 +7,16 @@ from git import Repo, InvalidGitRepositoryError
 
 sub_command = 'view'
 
+
 def init_sub_command(sub_parser: argparse.ArgumentParser):
     sub_parser.add_argument('path', nargs="?", default=".")
     sub_parser.add_argument('-p', action=argparse.BooleanOptionalAction)
     sub_parser.add_argument('-m', action=argparse.BooleanOptionalAction)
 
+
 def exec(args):
     view_repo_in_browser(args)
+
 
 def view_repo_in_browser(args):
     path = args.path
@@ -29,12 +32,12 @@ def view_repo_in_browser(args):
 
     if args.p:
         if _is_gitlab(http_url):
-            http_url =  http_url + '/pulls'
+            http_url = http_url + '/pulls'
         else:
             http_url = _remove_last_git(http_url) + '/pipelines'
     if args.m:
         if _is_gitlab(http_url):
-            http_url =  http_url + '/pulls'
+            http_url = http_url + '/pulls'
         else:
             http_url = _remove_last_git(http_url) + '/merge_requests'
     webbrowser.open(http_url)
@@ -45,8 +48,10 @@ def _remove_last_git(str):
         return str[:-len('.git')]
     return str
 
+
 def _is_github(url):
     return 'github' in url
+
 
 def _is_gitlab(path):
     return 'git' in path.split('/')
@@ -64,6 +69,7 @@ def get_first_http(repo) -> Optional[str]:
                 return https_url
             else:
                 return ''
+
     for remote in repo.remotes:
         http_url = next(iter([_parse(url) for url in remote.urls]), None)
         if http_url:
@@ -73,9 +79,10 @@ def get_first_http(repo) -> Optional[str]:
 
 def view_branch_in_browser(branch_name):
     try:
-        repo = Repo('.')
+        git_root = find_git_root('.')
+        repo = Repo(git_root)
     except InvalidGitRepositoryError:
-        print('is not git repo')
+        print(f'is not git repo')
         return
     for b in repo.branches:
         if b.name == branch_name:
@@ -89,3 +96,13 @@ def view_branch_in_browser(branch_name):
         return
     full_url = f"{http_url}/-/commit/{b.commit}"
     webbrowser.open(full_url)
+
+
+def find_git_root(start_path: str) -> Optional[str]:
+    """向上查找直到找到含有 .git 的目录"""
+    current = os.path.abspath(start_path)
+    while current != os.path.dirname(current):  # 直到到达根目录
+        if os.path.isdir(os.path.join(current, ".git")):
+            return current
+        current = os.path.dirname(current)
+    return None
