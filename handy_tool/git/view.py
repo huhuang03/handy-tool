@@ -1,3 +1,4 @@
+import os
 import re
 import webbrowser
 from typing import Optional
@@ -21,6 +22,7 @@ def exec(args):
 def view_repo_in_browser(args):
     path = args.path
     try:
+        path = find_git_root(path)
         repo = Repo(path)
     except InvalidGitRepositoryError:
         print('is not git repo')
@@ -102,6 +104,7 @@ def find_git_root(start_path: str) -> Optional[str]:
     """向上查找直到找到含有 .git 的目录"""
     current = os.path.abspath(start_path)
     while current != os.path.dirname(current):  # 直到到达根目录
+        print('current dir:', current)
         if os.path.isdir(os.path.join(current, ".git")):
             return current
         current = os.path.dirname(current)
