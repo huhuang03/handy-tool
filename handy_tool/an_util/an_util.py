@@ -8,6 +8,8 @@ import re
 from .get_apk import get_apk
 from .wifi import wifi
 from .push_cert import push_cert
+from .shorter import init_sub_parser as init_shorter_sub_parser
+from .shorter import call as call_shorter
 from handy_tool import util
 from . import get_apk
 
