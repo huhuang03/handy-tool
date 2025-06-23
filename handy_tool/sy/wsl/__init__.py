@@ -9,15 +9,18 @@ def _sync_bash():
     # fist get wsl port
     pass
 
+
 def wsl_sync():
+    print('wsl sync begin')
     git_sync()
 
-    sync_folder = os.path.expanduser(f'~/.sy')
-    if os.path.exists(sync_folder) and os.path.isfile(sync_folder):
+    target_folder = os.path.expanduser(f'~/.sy')
+    if os.path.exists(target_folder) and os.path.isfile(target_folder):
         exit("already exit file .sy, I want write to .sy folder!")
-    if not os.path.exists(sync_folder):
-        os.makedirs(sync_folder)
+    if not os.path.exists(target_folder):
+        os.makedirs(target_folder)
     src_folder = os.path.join(os.path.dirname(__file__), "asset")
-    shutil.copytree(src_folder, sync_folder, dirs_exist_ok=True)
+    print(f'src_folder: {src_folder}, target_folder: {target_folder}')
+    shutil.copytree(src_folder, target_folder, dirs_exist_ok=True)
 
-    _util.insert_source_command(os.path.expanduser("~/.bashrc"), "source ~/.sy/.sy.zshrc")
+    _util.insert_source_command(os.path.expanduser("~/.bashrc"), "source ~/.sy/.sy.bashrc")

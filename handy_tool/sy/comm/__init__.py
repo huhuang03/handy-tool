@@ -11,4 +11,4 @@ def git_sync():
     _git_alias_item("st", "status")
     _git_alias_item("br", "branch")
     os.system(f"git config --global core.autocrlf false")
-    print("config git finish finish")
+    print("config git finish")

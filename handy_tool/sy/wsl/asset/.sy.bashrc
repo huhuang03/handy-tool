@@ -1,4 +1,5 @@
 alias git=git.exe
-alias jump="export https_proxy=http://$HOST_PORT:7890 http_proxy=http://$HOST_PORT:7890 all_proxy=http://$HOST_PORT:7890"
+export WSL_HOST_IP=$(ip route | grep default | awk '{print $3}')
+alias jump="export https_proxy=http://$WSL_HOST_IP:7890 http_proxy=http://$WSL_HOST_IP:7890 all_proxy=http://$WSL_HOST_IP:7890"
 alias unjump="unset http_proxy;unset http_proxys"
 alias y=yarn
