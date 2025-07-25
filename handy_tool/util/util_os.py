@@ -13,3 +13,7 @@ def is_windows():
 
 def is_mac():
     return platform == 'darwin'
+
+
+def is_ubuntu():
+    return 'Ubuntu' in uname().version

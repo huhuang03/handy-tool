@@ -67,5 +67,8 @@ setup(
     description='handy tool for daily use',
     entry_points={
         'console_scripts': _get_scripts()
-    }
+    },
+    install_requires=[
+        "requests"
+    ]
 )

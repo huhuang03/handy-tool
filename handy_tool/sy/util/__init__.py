@@ -1,7 +1,10 @@
 import os.path
+from pathlib import Path
 
 
-def insert_source_command(file_path: str, source_command: str):
+def insert_source_command(file_path: str | Path, source_command: str):
+    if file_path is Path:
+        file_path = file_path.as_posix()
     insert_if_not_exist(file_path, "\n".join(["\n# added by .sy util", source_command]))
 
 
