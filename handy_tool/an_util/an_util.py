@@ -110,6 +110,30 @@ def sign_info(args):
             exit(1)
 
 
+        command_get_sha1 = ['openssl', 'x509', '-in', cert_full_path, '-pubkey', '-noout', '-fingerprint', '-sha1']
+        rst = subprocess.run(command_get_sha1, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        output = rst.stdout
+
+        match = re.search(r'Fingerprint=([A-F0-9:]+)', output)
+        if match:
+            sha1_fingerprint = match.group(1)
+            print("sha1 fingerprint:", sha1_fingerprint)
+        else:
+            exit(1)
+
+        command_get_sha256 = ['openssl', 'x509', '-in', cert_full_path, '-noout', '-fingerprint', '-sha256']
+        rst = subprocess.run(command_get_sha256, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+        output = rst.stdout
+
+        match = re.search(r'Fingerprint=([A-F0-9:]+)', output)
+        if match:
+            sha256_fingerprint = match.group(1)
+            print("sha256 fingerprint:", sha256_fingerprint)
+        else:
+            print('sha256 not match')
+            exit(1)
+
+
 def ls():
     items = util.run_get_output("adb shell pm list packages -3")
     items: [str] = items.split("\n")

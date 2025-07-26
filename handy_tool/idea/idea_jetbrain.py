@@ -6,6 +6,7 @@ from .idea_base import IdeaBase
 from ..util.util_find_program import find_program
 from ..app import App
 from ..util.util_os import is_mac, is_windows
+from .base.idea_finder_config import IdeaFinderConfig, empty_config
 
 JET_BRAIN_FOLDER_NAME = "JetBrains"
 
@@ -19,26 +20,31 @@ def walk_reverse(root):
     if os.path.isfile(root):
         return
     all_files_and_folder = os.listdir(root)
-    all_files = [f for f in all_files_and_folder if os.path.isfile(os.path.join(root, f)) ]
-    all_folders = [f for f in all_files_and_folder if os.path.isdir(os.path.join(root, f)) ]
+    all_files = [f for f in all_files_and_folder if os.path.isfile(os.path.join(root, f))]
+    all_folders = [f for f in all_files_and_folder if os.path.isdir(os.path.join(root, f))]
     yield root, list(reversed(all_folders)), all_files
     for folder in reversed(all_folders):
         yield from walk_reverse(os.path.join(root, folder))
 
 
 class IDeaJetBrains(IdeaBase):
-    def __init__(self, win_folder, win_exe_name='', mac_app_folder_name='', toolbox_bin_name=''):
+    def __init__(self,
+                 win_folder,
+                 win_exe_name='', mac_app_folder_name='', toolbox_bin_name='',
+                 find_config: IdeaFinderConfig = empty_config):
         """
         Args:
             toolbox_bin_name toolbox可以生成script，比如它会为webstorm生成/usr/local/bin/webstorm，如果是webstorm。传入webstorm
         """
         self.has_toolbox_exe = False
         self.folder_name = win_folder
+        self.find_config = find_config
         self.exe_name = win_exe_name or self.folder_name
         self.mac_app_folder_name = mac_app_folder_name or win_folder
         if is_windows():
             self.jet_brain_folders = find_program(JET_BRAIN_FOLDER_NAME)
             toolbox_app_folder = Path('~/AppData/Local/JetBrains/Toolbox/apps').expanduser()
+            # why has multy?
             if os.path.exists(toolbox_app_folder):
                 self.jet_brain_folders.append(toolbox_app_folder.resolve().__str__())
             if os.path.exists(os.path.expanduser('~/AppData/Local/Programs')):
@@ -50,6 +56,9 @@ class IDeaJetBrains(IdeaBase):
             self.has_toolbox_exe = toolbox_bin_name and os.path.exists(self.toolbox_exe_path)
 
     def _get_folder(self) -> str:
+        """
+        :return:
+        """
         for jet_brain_folder in self.jet_brain_folders:
             for fo in os.listdir(jet_brain_folder):
                 if self.folder_name.lower() in fo.lower():
@@ -77,9 +86,29 @@ class IDeaJetBrains(IdeaBase):
                                     return os.path.join(bin_folder, f)
         return None
 
-    def get_exe_in_win(self) -> str:
+    def _find_path_in_toolbox(self) -> Optional[Path]:
+        """
+        for now only check in windows
+        has
+        """
+        if not self.find_config.name:
+            return None
+        toolbox_app_root = _get_toolbox_app_folder()
+        if not toolbox_app_root:
+            return None
+        return _get_ch_path(toolbox_app_root / self.find_config.name)
+
+    def _get_exe_in_win(self) -> str:
+        """
+        find the exe path in win
+        :return:
+        """
         if is_mac():
             return ""
+        path_in_toolbox = self._find_path_in_toolbox()
+        if path_in_toolbox:
+            return path_in_toolbox.as_posix()
+
         user_local_path = self._check_user_local_path()
         if user_local_path:
             return user_local_path
@@ -104,6 +133,7 @@ class IDeaJetBrains(IdeaBase):
             for i in os.listdir(root):
                 if self.mac_app_folder_name.lower() in i.lower() and i.endswith(".app"):
                     return os.path.join(root, i)
+
         found = find_folder(apps_folder)
         if found:
             return found
@@ -118,10 +148,34 @@ class IDeaJetBrains(IdeaBase):
         parser.add_argument('-c', help='prepare use community edition', action=argparse.BooleanOptionalAction)
 
     def run(self, args):
-        win_path = self.get_exe_in_win()
+        win_path = self._get_exe_in_win()
         mac_exe_path = self.toolbox_exe_path if self.has_toolbox_exe else self.get_exe_in_mac()
         path = win_path if is_windows() else mac_exe_path
         if args.path:
             App(win_path, mac_exe_path).open_file(args.path)
         else:
             print('path is: ', path)
+
+
+def _get_ch_path(app_path: Path) -> Optional[Path]:
+    """
+    toolbox/apps/xxxx(Fleet)/ch-0/.shellLnk, the content
+    @:param app_path: like toolbox/apps/xxxx(Fleet)
+    :return:
+    """
+    shell_link_path = app_path / 'ch-0/.shellLink'
+    print('shell_link_path: {}'.format(shell_link_path))
+    if not shell_link_path.exists():
+        return None
+    text = shell_link_path.read_text()
+    link_path = Path(text)
+    return link_path if link_path.exists() else None
+
+
+def _get_toolbox_app_folder() -> Optional[Path]:
+    """
+    get the toolbox app folder, none if not found
+    :return:
+    """
+    p = Path('~/AppData/Local/JetBrains/Toolbox/apps').expanduser()
+    return p if p.exists() else None
