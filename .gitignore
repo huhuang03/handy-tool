@@ -7,7 +7,6 @@ server_list.txt
 local.ini
 sync_private/
 handy_tool/sync1/settings.yml
-*.egg-info/
 venv/
-
-#.*
+build/
+\#.*

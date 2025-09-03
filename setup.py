@@ -18,6 +18,7 @@ def _create_command(name, file_path):
 COMMANDS = [
     'just_ex',
     'gitup', 'done', 'gettopactivity', 'ip', 'merged_rm', 'gh1', 'iid',
+    'check_missing', 'random_port', 'random_pwd',
     'clean_space', 'du1', 'apktool1',
     'lg', 'utf8_2_utf8bom', 'sync_link', 'find_program',
     'rn_ex', 'json2bean', 'jt_code', 'remote', 'img',
