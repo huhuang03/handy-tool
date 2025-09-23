@@ -1,0 +1,11 @@
+* Install
+#+begin_src sheel
+pip install -e .
+#+end_src
+
+* Utils
+
+| ide          |                                                                 |
+|--------------+-----------------------------------------------------------------|
+| acode <path> | open project with android studio                                |
+| xxcode       | like ccode, open with clion, and theres other like wcode, pcode |
