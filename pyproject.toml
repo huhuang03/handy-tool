@@ -1,0 +1,22 @@
+[project]
+name = "handy-tool"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+acode = 'handy_tool.idea.idea_android:main'
+pcode = 'handy_tool.idea.idea_pycharm:main'
+rcode = 'handy_tool.idea.idea_rust_rover:main'
+fcode = 'handy_tool.idea.idea_fleet:main'
+ccode = 'handy_tool.idea.idea_clion:main'
+cncode = 'handy_tool.idea.idea_clion_nova:main'
+gcode = 'handy_tool.idea.idea_go_land:main'
+pcode = 'handy_tool.idea.idea_pycharm:main'
+icode = 'handy_tool.idea.idea_intellij:main'
+wcode = 'handy_tool.idea.idea_webstorm:main'
+hcode = 'handy_tool.idea.idea_phpstorm:main'
+vcode = 'handy_tool.idea.idea.vs:main'
+dcode = 'handy_tool.idea.idea_data_grip:main'
