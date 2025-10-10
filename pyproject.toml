@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    'python-magic-bin'
+]
 
 [project.scripts]
 acode = 'handy_tool.idea.idea_android:main'
@@ -19,3 +21,7 @@ wcode = 'handy_tool.idea.idea_webstorm:main'
 hcode = 'handy_tool.idea.idea_phpstorm:main'
 vcode = 'handy_tool.idea.idea.vs:main'
 dcode = 'handy_tool.idea.idea_data_grip:main'
+done = 'handy_tool.done:main'
+wait = 'handy_tool.wait:main'
+# can overwrite the default files on linux, so named files1
+file1 = 'handy_tool.files:main'

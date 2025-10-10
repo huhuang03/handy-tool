@@ -9,3 +9,5 @@ pip install -e .
 |--------------+-----------------------------------------------------------------|
 | acode <path> | open project with android studio                                |
 | xxcode       | like ccode, open with clion, and theres other like wcode, pcode |
+| done         | show a dialog that msg 'Done', only windows                     |
+| wait <url>   | wait/check url online                                           |
