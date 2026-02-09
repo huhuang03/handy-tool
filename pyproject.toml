@@ -22,6 +22,7 @@ wcode = 'handy_tool.idea.idea_webstorm:main'
 hcode = 'handy_tool.idea.idea_phpstorm:main'
 vcode = 'handy_tool.idea.idea.vs:main'
 dcode = 'handy_tool.idea.idea_data_grip:main'
+
 done = 'handy_tool.done:main'
 wait = 'handy_tool.wait:main'
 # can overwrite the default files on linux, so named file1
@@ -29,3 +30,5 @@ file1 = 'handy_tool.files:main'
 urlencode = 'handy_tool.urlencode:main'
 unzip1 = 'handy_tool.unzip1:main'
 adb1 = 'handy_tool.adb:main'
+md51 = 'handy_tool.md5:main'
+docker1 = 'handy_tool.docker1:main'
