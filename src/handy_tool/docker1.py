@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 import re
 import os
 
@@ -16,10 +16,9 @@ def main():
     src_path = Path(src_path_str)
     assert src_path.exists()
     src_content = src_path.read_text(encoding='utf-8')
-    load_dotenv()
+    load_dotenv(dotenv_path=find_dotenv(usecwd=True))
 
-     # 正则匹配 ${VAR_NAME}
-    pattern = re.compile(r'\$\{([A-Za-z0-9_]+)\}')
+    pattern = re.compile(r'\$\{([A-Za-z0-9_]+)}')
 
     replaced_vars = {}
     skipped_vars = set()
